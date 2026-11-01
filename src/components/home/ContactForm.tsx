@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Mail } from "lucide-react";
 import { Accent } from "@/components/brand/Accent";
 import { Container } from "@/components/layout/Container";
@@ -65,7 +65,13 @@ function Field({ field, locale }: { field: FormField; locale: Locale }) {
 
 export function ContactForm({ locale }: { locale: Locale }) {
   const { contact } = homeContent[locale];
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "sent" | "error" | "rateLimited" | "invalid"
+  >("idle");
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -76,9 +82,11 @@ export function ContactForm({ locale }: { locale: Locale }) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, locale }),
+        body: JSON.stringify({ ...payload, locale, t: Date.now() - startedAt.current }),
       });
-      setStatus(res.ok ? "sent" : "error");
+      setStatus(
+        res.ok ? "sent" : res.status === 429 ? "rateLimited" : res.status === 400 ? "invalid" : "error",
+      );
     } catch {
       setStatus("error");
     }
@@ -132,9 +140,9 @@ export function ContactForm({ locale }: { locale: Locale }) {
               </div>
 
               <div className="sm:col-span-2">
-                {status === "error" && (
+                {(status === "error" || status === "rateLimited" || status === "invalid") && (
                   <p role="alert" className="mb-5 border-l-2 border-red-600 pl-4 text-sm text-red-700">
-                    {contact.error}
+                    {status === "rateLimited" ? contact.rateLimited : status === "invalid" ? contact.invalid : contact.error}
                   </p>
                 )}
                 <button
