@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { routing, type Locale } from "@/i18n/routing";
+import { IS_PRODUCTION, SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -28,7 +29,9 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nexova-nu.vercel.app"),
+  metadataBase: new URL(SITE_URL),
+  // Previews and branch builds must never be indexed.
+  ...(IS_PRODUCTION ? {} : { robots: { index: false, follow: false } }),
   title: "Nexova",
   description: "Swiss web studio — bespoke websites for ambitious businesses.",
 };
