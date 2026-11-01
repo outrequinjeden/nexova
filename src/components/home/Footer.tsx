@@ -1,47 +1,51 @@
+import { Wordmark } from "@/components/brand/Logo";
 import { Container } from "@/components/layout/Container";
-import { homeContent } from "@/data/home/content";
+import { CONTACT_EMAIL, homeContent } from "@/data/home/content";
 import type { Locale } from "@/i18n/routing";
 
 export function Footer({ locale }: { locale: Locale }) {
-  const { footer } = homeContent[locale];
+  const { footer, nav } = homeContent[locale];
 
   return (
-    <footer className="border-t border-border/60 py-12">
-      <Container className="grid gap-10 sm:grid-cols-3">
-        <div>
-          <p className="text-lg font-semibold tracking-tight">{footer.brand}</p>
-          <p className="mt-3 text-sm text-muted-foreground">{footer.tagline}</p>
-          <p className="mt-3 text-sm text-muted-foreground">{footer.location}</p>
+    <footer className="bg-ink text-white">
+      <Container className="grid gap-14 py-20 md:grid-cols-12">
+        <div className="md:col-span-6">
+          <Wordmark />
+          <p className="mt-6 max-w-sm leading-relaxed text-white/55">{footer.tagline}</p>
         </div>
 
-        <div>
-          <p className="text-sm font-medium">{footer.companyLabel}</p>
-          <ul className="mt-3 space-y-2">
-            {footer.links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {link.label}
+        <nav aria-label={footer.navLabel} className="md:col-span-3">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/40">
+            {footer.navLabel}
+          </p>
+          <ul className="mt-5 space-y-3">
+            {nav.links.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className="text-white/75 transition-colors hover:text-white">
+                  {l.label}
                 </a>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
 
-        <div>
-          <p className="text-sm font-medium">{footer.contactLabel}</p>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li>{footer.email}</li>
-            <li>{footer.location}</li>
+        <div className="md:col-span-3">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/40">
+            {footer.contactLabel}
+          </p>
+          <ul className="mt-5 space-y-3 text-white/75">
+            <li>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="transition-colors hover:text-white">
+                {CONTACT_EMAIL}
+              </a>
+            </li>
+            <li>{footer.region}</li>
           </ul>
         </div>
       </Container>
 
-      <Container className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-border/60 pt-6 text-xs text-muted-foreground sm:flex-row">
+      <Container className="border-t border-white/10 py-6 text-xs text-white/40">
         <p>{footer.copyright}</p>
-        <p>{footer.builtWith}</p>
       </Container>
     </footer>
   );

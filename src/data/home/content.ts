@@ -1,778 +1,626 @@
-import type { HomeContent } from "@/types/home";
 import type { Locale } from "@/i18n/routing";
+import type { FormField, HomeContent } from "@/types/home";
 
-const en: HomeContent = {
-  seo: {
-    title: "Nexova — Premium Websites for Local Businesses in Switzerland",
-    description:
-      "Nexova builds modern, fast, mobile-friendly websites with SEO basics, contact forms, booking systems, and simple automations to help local businesses in Switzerland look professional and capture more clients.",
-  },
-  nav: {
-    links: [
-      { label: "Home", href: "#home" },
-      { label: "Services", href: "#services" },
-      { label: "Demos", href: "#demos" },
-      { label: "Process", href: "#process" },
-      { label: "Contact", href: "#contact" },
-    ],
-    cta: "Get a free idea",
-  },
-  hero: {
-    headline: "Premium websites for local businesses in Switzerland.",
-    body: "Nexova builds modern, fast, mobile-friendly websites with SEO basics, contact forms, booking systems, and simple automations to help local businesses look professional and capture more clients.",
-    ctaPrimary: "Get a free website idea",
-    ctaSecondary: "View demo websites",
-    bullets: [
-      { icon: "📱", label: "Mobile-first design" },
-      { icon: "🔍", label: "SEO basics included" },
-      { icon: "📋", label: "Contact and booking ready" },
-      { icon: "⚡", label: "Simple automations available" },
-    ],
-  },
-  services: {
-    headline: "What we build for you",
-    subheader:
-      "Every service is tailored to local businesses that want to look professional online.",
-    items: [
-      {
-        title: "One-page website",
-        description:
-          "A clean, focused single page that presents your business clearly and converts visitors into leads. Perfect for getting started quickly.",
-      },
-      {
-        title: "Full website (3–5 pages)",
-        description:
-          "A complete website with home, about, services, gallery, and contact pages — fully responsive. Gives your business a solid online presence.",
-      },
-      {
-        title: "SEO basics",
-        description:
-          "Every site includes proper titles, meta descriptions, heading structure, and local keywords. Helps you get found on Google locally.",
-      },
-      {
-        title: "Contact forms",
-        description:
-          "A professional contact form that sends leads directly to your email inbox. Never miss a potential client again.",
-      },
-      {
-        title: "Booking systems",
-        description:
-          "Let clients book appointments or sessions directly on your website. Save time and reduce phone calls.",
-      },
-      {
-        title: "Website automations",
-        description:
-          "Connect your form to email, Google Sheets, Calendar, or send auto-replies. Run your business smarter with less effort.",
-      },
-      {
-        title: "Monthly maintenance",
-        description:
-          "We keep your website updated, secure, and running smoothly every month. Focus on your business, not your website.",
-      },
-    ],
-  },
-  demosSection: {
-    headline: "Real website concepts we build",
-    subheader:
-      "See the quality we deliver. Every demo represents a real type of project we can build for your business.",
-    linkLabel: "View demo →",
-  },
-  whyChoose: {
-    headline: "Why local businesses choose Nexova",
-    subheader:
-      "We understand local business. We know what matters for restaurants, coaches, instructors, and shops in Switzerland.",
-    items: [
-      {
-        icon: "🇨🇭",
-        title: "Swiss quality",
-        description:
-          "Clean, precise, reliable. Every website reflects the standards your clients expect.",
-      },
-      {
-        icon: "📱",
-        title: "Mobile-first always",
-        description:
-          "Most of your clients search on mobile. Your website performs perfectly on every screen.",
-      },
-      {
-        icon: "🎯",
-        title: "Built to convert",
-        description:
-          "Every design decision is made to turn visitors into leads and clients for your business.",
-      },
-      {
-        icon: "⚡",
-        title: "Fast delivery",
-        description:
-          "We move efficiently. You get a professional website without months of waiting.",
-      },
-      {
-        icon: "💬",
-        title: "Clear communication",
-        description: "No jargon. We speak plainly and keep you informed at every step.",
-      },
-      {
-        icon: "🔧",
-        title: "Easy to update",
-        description:
-          "Your website stays fresh. We handle updates so you can focus on what you do best.",
-      },
-    ],
-  },
-  process: {
-    headline: "How we work",
-    subheader: "A simple, clear process from first contact to launch.",
-    steps: [
-      {
-        title: "Free idea",
-        description:
-          "We review your business and suggest a modern website direction — completely free and without obligation.",
-      },
-      {
-        title: "Design & build",
-        description:
-          "We create a clean, responsive, professional website tailored to your brand and clients.",
-      },
-      {
-        title: "SEO & automations",
-        description:
-          "We add SEO basics, contact forms, booking tools, or simple automations if needed.",
-      },
-      {
-        title: "Launch & support",
-        description:
-          "Your website goes live and can be maintained monthly so it stays fresh and functional.",
-      },
-    ],
-  },
-  automations: {
-    headline: "Simple automations that save you time",
-    subheader: "Connect your website to the tools you already use. No complexity, just results.",
-    cta: "Ask about automations →",
-    items: [
-      "Contact form to your email inbox",
-      "Contact form to Google Sheets",
-      "Automatic confirmation email to your client",
-      "Booking system connection",
-      "Google Calendar connection",
-      "Review request after appointment",
-      "Lead notification to your phone or email",
-    ],
-  },
-  seoSection: {
-    headline: "SEO basics, built into every website",
-    subheader: "We don't just build websites — we build websites that can be found.",
-    items: [
-      {
-        icon: "🏷️",
-        title: "Optimized titles & meta descriptions",
-        description: "Each page has a unique, keyword-rich title and description.",
-      },
-      {
-        icon: "📐",
-        title: "Proper heading structure",
-        description: "Clear H1, H2, H3 structure for both users and search engines.",
-      },
-      {
-        icon: "⚡",
-        title: "Fast mobile pages",
-        description: "Optimized performance on all devices for better rankings.",
-      },
-      {
-        icon: "🖼️",
-        title: "Image alt text",
-        description: "Every image is labeled so search engines understand your content.",
-      },
-      {
-        icon: "📍",
-        title: "Local business keywords",
-        description: "Targeting searches specific to Valais, Sion, and your industry.",
-      },
-      {
-        icon: "🗺️",
-        title: "Google Maps & contact info",
-        description: "Your location and contact are easy to find — for clients and Google.",
-      },
-      {
-        icon: "🔗",
-        title: "Local business structured data",
-        description: "Schema markup that helps Google understand who you are.",
-      },
-    ],
-  },
-  ctaBeforeForm: {
-    headline: "Ready to upgrade your online presence?",
-    subheader: "Get a free website idea for your business — no pressure, no obligation.",
-    ctaPrimary: "Get my free website idea",
-    ctaSecondary: "See our demos first",
-  },
-  contactForm: {
-    headline: "Tell us about your project",
-    subheader:
-      "No pressure. Send your business details and Nexova will suggest a clear website direction.",
-    fields: [
-      { name: "name", label: "Your name", type: "text", required: true },
-      { name: "email", label: "Email address", type: "email", required: true },
-      { name: "businessName", label: "Business name", type: "text" },
-      { name: "businessType", label: "Type of business", type: "text" },
-      {
-        name: "projectType",
-        label: "Project type",
-        type: "select",
-        options: [
-          "Select an option",
-          "One-page website",
-          "Full website",
-          "Website redesign",
-          "Booking system",
-          "Automation setup",
-          "Not sure yet",
-        ],
-      },
-      {
-        name: "budget",
-        label: "Budget",
-        type: "select",
-        options: ["Select an option", "Under 500 CHF", "500–1000 CHF", "1000–2000 CHF", "2000+ CHF"],
-      },
-      { name: "message", label: "Your message", type: "textarea", required: true },
-    ],
-    submitLabel: "Get my free website idea",
-    confirmationTitle: "Thanks — message received.",
-    confirmationBody: "We'll get back to you with a free website idea shortly.",
-  },
-  footer: {
-    brand: "Nexova",
-    tagline:
-      "Modern websites for local businesses that want to look professional and get more clients.",
-    location: "Sion, Valais — Switzerland",
-    companyLabel: "Company",
-    contactLabel: "Contact",
-    links: [
-      { label: "Home", href: "#home" },
-      { label: "Services", href: "#services" },
-      { label: "Demos", href: "#demos" },
-      { label: "Process", href: "#process" },
-      { label: "Contact", href: "#contact" },
-    ],
-    email: "nexova.website@gmail.com",
-    copyright: "© 2026 Nexova. All rights reserved.",
-    builtWith: "Built with precision in Switzerland.",
-  },
-};
+export const CONTACT_EMAIL = "nexova.website@gmail.com";
+
+/** Option values are the English labels the API / inbox will read. */
+const PROJECT_VALUES = [
+  "New website",
+  "Website redesign",
+  "E-commerce",
+  "Booking system",
+  "Other",
+];
+
+const LANGUAGE_OPTIONS = [
+  { value: "Français", label: "Français" },
+  { value: "Deutsch", label: "Deutsch" },
+  { value: "English", label: "English" },
+];
+
+function fields(t: {
+  name: string;
+  businessName: string;
+  email: string;
+  phone: string;
+  website: string;
+  industry: string;
+  projectType: string;
+  projectOptions: string[];
+  message: string;
+  language: string;
+  optional: string;
+}): FormField[] {
+  return [
+    { name: "name", label: t.name, type: "text", required: true, autoComplete: "name" },
+    { name: "businessName", label: t.businessName, type: "text", required: true, autoComplete: "organization" },
+    { name: "email", label: t.email, type: "email", required: true, autoComplete: "email" },
+    { name: "phone", label: `${t.phone} (${t.optional})`, type: "tel", autoComplete: "tel" },
+    { name: "website", label: `${t.website} (${t.optional})`, type: "url", autoComplete: "url", placeholder: "https://" },
+    { name: "industry", label: t.industry, type: "text", required: true },
+    {
+      name: "projectType",
+      label: t.projectType,
+      type: "select",
+      required: true,
+      options: PROJECT_VALUES.map((value, i) => ({ value, label: t.projectOptions[i] })),
+    },
+    { name: "message", label: t.message, type: "textarea", required: true },
+    { name: "preferredLanguage", label: t.language, type: "select", options: LANGUAGE_OPTIONS },
+  ];
+}
 
 const fr: HomeContent = {
   seo: {
-    title: "Nexova — Sites web premium pour entreprises locales en Suisse",
+    title: "Nexova — Création de sites web sur mesure en Suisse",
     description:
-      "Nexova conçoit des sites web modernes, rapides et adaptés au mobile, avec bases SEO, formulaires de contact, réservation et automatisations simples pour les entreprises locales en Suisse.",
+      "Studio web suisse : création de sites internet professionnels, refonte de sites web et SEO pour PME et entreprises ambitieuses en Suisse romande et alémanique.",
   },
   nav: {
     links: [
-      { label: "Accueil", href: "#home" },
+      { label: "Approche", href: "#approach" },
       { label: "Services", href: "#services" },
-      { label: "Démos", href: "#demos" },
+      { label: "Réalisations", href: "#work" },
       { label: "Processus", href: "#process" },
-      { label: "Contact", href: "#contact" },
+      { label: "À propos", href: "#about" },
     ],
-    cta: "Obtenir une idée gratuite",
+    cta: "Discuter de votre projet",
+    menuOpen: "Ouvrir le menu",
+    menuClose: "Fermer le menu",
   },
   hero: {
-    headline: "Des sites web premium pour les entreprises locales en Suisse.",
-    body: "Nexova conçoit des sites web modernes, rapides et adaptés au mobile, avec les bases SEO, formulaires de contact, systèmes de réservation et automatisations simples pour aider les entreprises locales à paraître professionnelles et à attirer plus de clients.",
-    ctaPrimary: "Obtenir une idée de site gratuite",
-    ctaSecondary: "Voir les sites de démonstration",
-    bullets: [
-      { icon: "📱", label: "Design mobile-first" },
-      { icon: "🔍", label: "Bases SEO incluses" },
-      { icon: "📋", label: "Contact et réservation prêts" },
-      { icon: "⚡", label: "Automatisations simples disponibles" },
+    eyebrow: "Studio web suisse",
+    headline: "L'excellence digitale, *construite autour* de votre entreprise.",
+    body: "Nexova conçoit et développe des sites sur mesure pour les entreprises ambitieuses : un design singulier, une technique rigoureuse et des bases de référencement posées dès le départ.",
+    ctaPrimary: "Discuter de votre projet",
+    ctaSecondary: "Découvrir nos réalisations",
+    keywords: ["Design sur mesure", "Pensé pour le mobile", "SEO dès la conception"],
+  },
+  approach: {
+    eyebrow: "Notre approche",
+    headline: "Pas de modèle. *Un site pensé* pour votre activité.",
+    body: "Chaque entreprise a sa propre histoire, ses clients et ses ambitions. Nous commençons par les comprendre, puis nous concevons un site qui leur ressemble — jamais un gabarit adapté à la hâte.",
+    pillars: [
+      {
+        title: "Une approche personnalisée",
+        description:
+          "Un échange direct, du premier rendez-vous à la mise en ligne. Le fondateur suit personnellement chaque projet.",
+      },
+      {
+        title: "Un design sur mesure",
+        description:
+          "Typographie, couleurs, mise en page et images composées pour votre marque, pas pour un catalogue.",
+      },
+      {
+        title: "Une exigence technique",
+        description:
+          "Un code propre, des pages rapides, une expérience mobile soignée et des bases SEO intégrées.",
+      },
+      {
+        title: "Une relation durable",
+        description:
+          "Une fois le site en ligne, nous restons disponibles pour qu'il évolue avec votre activité.",
+      },
     ],
   },
   services: {
-    headline: "Ce que nous créons pour vous",
-    subheader:
-      "Chaque service est pensé pour les entreprises locales qui veulent une image professionnelle en ligne.",
+    eyebrow: "Services",
+    headline: "Tout ce qu'il faut pour une présence en ligne *à la hauteur*.",
     items: [
       {
-        title: "Site une page",
+        title: "Design de site sur mesure",
         description:
-          "Une page unique, claire et efficace qui présente votre entreprise et convertit les visiteurs en clients. Idéal pour démarrer rapidement.",
+          "Une identité visuelle et une expérience conçues pour votre marque et vos clients.",
       },
       {
-        title: "Site complet (3–5 pages)",
+        title: "Développement web",
         description:
-          "Un site complet avec accueil, à propos, services, galerie et contact — entièrement responsive. Une présence en ligne solide pour votre entreprise.",
+          "Des sites rapides, accessibles et maintenables, construits avec des technologies modernes.",
+      },
+      {
+        title: "Refonte de site",
+        description:
+          "Repenser un site existant — image, structure, performance — sans perdre ce qui fonctionne.",
+      },
+      {
+        title: "Sites d'entreprise",
+        description:
+          "Une présence professionnelle claire pour présenter votre activité, vos services et vos références.",
+      },
+      {
+        title: "Réservation et rendez-vous",
+        description:
+          "Des parcours de réservation ou de prise de rendez-vous intégrés naturellement à votre site.",
       },
       {
         title: "Bases SEO",
         description:
-          "Chaque site inclut des titres soignés, des méta-descriptions, une structure de titres et des mots-clés locaux. Pour être trouvé sur Google localement.",
-      },
-      {
-        title: "Formulaires de contact",
-        description:
-          "Un formulaire de contact professionnel qui envoie les demandes directement dans votre boîte mail. Ne manquez plus jamais un client potentiel.",
-      },
-      {
-        title: "Systèmes de réservation",
-        description:
-          "Permettez à vos clients de réserver directement sur votre site. Gagnez du temps et réduisez les appels téléphoniques.",
-      },
-      {
-        title: "Automatisations du site",
-        description:
-          "Connectez votre formulaire à un e-mail, Google Sheets, un calendrier, ou envoyez des réponses automatiques. Gérez votre entreprise plus intelligemment.",
-      },
-      {
-        title: "Maintenance mensuelle",
-        description:
-          "Nous gardons votre site à jour, sécurisé et performant chaque mois. Concentrez-vous sur votre entreprise, pas sur votre site.",
+          "Structure, contenus et technique préparés pour que votre site soit bien référencé.",
       },
     ],
   },
-  demosSection: {
-    headline: "Des concepts de sites réels que nous créons",
-    subheader:
-      "Découvrez la qualité que nous livrons. Chaque démo représente un type de projet concret que nous pouvons réaliser pour votre entreprise.",
-    linkLabel: "Voir la démo →",
-  },
-  whyChoose: {
-    headline: "Pourquoi les entreprises locales choisissent Nexova",
-    subheader:
-      "Nous comprenons les entreprises locales. Nous savons ce qui compte pour les restaurants, coachs, moniteurs et commerces en Suisse.",
-    items: [
+  work: {
+    eyebrow: "Réalisations",
+    headline: "Des concepts conçus *comme de vrais projets*.",
+    note: "Ces quatre projets sont des démonstrations conceptuelles imaginées par Nexova. Ce ne sont pas des clients réels. Les aperçus complets sont en préparation.",
+    status: "Aperçu en préparation",
+    projects: [
       {
-        icon: "🇨🇭",
-        title: "Qualité suisse",
-        description:
-          "Propre, précis, fiable. Chaque site reflète les standards que vos clients attendent.",
+        id: "valmont",
+        name: "Valmont Automobiles",
+        industry: "Garage automobile de prestige",
+        concept:
+          "Une vitrine sombre et cinématique pour un atelier haut de gamme : galerie de véhicules, présentation des prestations, prise de contact discrète.",
       },
       {
-        icon: "📱",
-        title: "Toujours mobile-first",
-        description:
-          "La plupart de vos clients naviguent sur mobile. Votre site fonctionne parfaitement sur tous les écrans.",
+        id: "orme",
+        name: "Studio Orme",
+        industry: "Architecture et construction",
+        concept:
+          "Un site éditorial et minimal où la photographie d'architecture raconte chaque projet, du plan à la livraison.",
       },
       {
-        icon: "🎯",
-        title: "Pensé pour convertir",
-        description: "Chaque choix de design est fait pour transformer vos visiteurs en clients.",
+        id: "aurele",
+        name: "Maison Aurèle",
+        industry: "Salon de beauté",
+        concept:
+          "Une identité douce et élégante, un parcours de réservation simple et des visuels d'intérieur soignés.",
       },
       {
-        icon: "⚡",
-        title: "Livraison rapide",
-        description:
-          "Nous travaillons efficacement. Vous obtenez un site professionnel sans des mois d'attente.",
-      },
-      {
-        icon: "💬",
-        title: "Communication claire",
-        description: "Pas de jargon. Nous parlons simplement et vous tenons informé à chaque étape.",
-      },
-      {
-        icon: "🔧",
-        title: "Facile à mettre à jour",
-        description:
-          "Votre site reste à jour. Nous gérons les mises à jour pour que vous puissiez vous concentrer sur votre métier.",
+        id: "verdane",
+        name: "Verdane Paysages",
+        industry: "Paysagisme et aménagements extérieurs",
+        concept:
+          "Une expérience immersive en grands formats, aux teintes naturelles, pour présenter jardins et réalisations.",
       },
     ],
   },
   process: {
-    headline: "Comment nous travaillons",
-    subheader: "Un processus simple et clair, du premier contact au lancement.",
+    eyebrow: "Processus",
+    headline: "Un parcours clair, *de la première idée* à la mise en ligne.",
+    body: "Chaque étape a un but précis. Vous savez toujours où en est votre projet et ce qui vient ensuite.",
     steps: [
-      {
-        title: "Idée gratuite",
-        description:
-          "Nous étudions votre entreprise et proposons une direction de site moderne — entièrement gratuit et sans engagement.",
-      },
-      {
-        title: "Design & développement",
-        description:
-          "Nous créons un site propre, responsive et professionnel, adapté à votre marque et à vos clients.",
-      },
-      {
-        title: "SEO & automatisations",
-        description:
-          "Nous ajoutons les bases SEO, formulaires de contact, outils de réservation ou automatisations simples si besoin.",
-      },
-      {
-        title: "Lancement & support",
-        description:
-          "Votre site est mis en ligne et peut être maintenu mensuellement pour rester frais et fonctionnel.",
-      },
+      { title: "Découverte", description: "Comprendre votre activité, vos clients et vos objectifs." },
+      { title: "Stratégie", description: "Définir la direction digitale : structure, message et priorités." },
+      { title: "Design", description: "Créer l'expérience visuelle, du premier écran jusqu'aux détails." },
+      { title: "Développement", description: "Construire le site avec exigence : performance, accessibilité, mobile." },
+      { title: "Lancement", description: "Tester, corriger et mettre en ligne avec soin." },
+      { title: "Accompagnement", description: "Rester disponible après la mise en ligne, selon vos besoins." },
     ],
   },
-  automations: {
-    headline: "Des automatisations simples qui vous font gagner du temps",
-    subheader: "Connectez votre site aux outils que vous utilisez déjà. Pas de complexité, juste des résultats.",
-    cta: "En savoir plus sur les automatisations →",
-    items: [
-      "Formulaire de contact vers votre boîte mail",
-      "Formulaire de contact vers Google Sheets",
-      "E-mail de confirmation automatique pour votre client",
-      "Connexion au système de réservation",
-      "Connexion à Google Calendar",
-      "Demande d'avis après rendez-vous",
-      "Notification de prospect sur votre téléphone ou e-mail",
+  about: {
+    eyebrow: "À propos",
+    headline: "Un studio web suisse, *une relation directe*.",
+    body: [
+      "Nexova est un studio web moderne, né d'une conviction simple : une entreprise sérieuse mérite un site à son image, pas un modèle générique.",
+      "Le fondateur est personnellement impliqué dans chaque projet et dans chaque relation client. Vous savez toujours à qui vous parlez.",
     ],
   },
-  seoSection: {
-    headline: "Les bases SEO, intégrées à chaque site",
-    subheader: "Nous ne créons pas seulement des sites — nous créons des sites que l'on peut trouver.",
-    items: [
-      {
-        icon: "🏷️",
-        title: "Titres & méta-descriptions optimisés",
-        description: "Chaque page a un titre et une description uniques, riches en mots-clés.",
-      },
-      {
-        icon: "📐",
-        title: "Structure de titres adaptée",
-        description: "Une structure H1, H2, H3 claire, pour les utilisateurs comme pour les moteurs de recherche.",
-      },
-      {
-        icon: "⚡",
-        title: "Pages mobiles rapides",
-        description: "Performance optimisée sur tous les appareils pour un meilleur classement.",
-      },
-      {
-        icon: "🖼️",
-        title: "Texte alternatif des images",
-        description: "Chaque image est décrite pour que les moteurs de recherche comprennent votre contenu.",
-      },
-      {
-        icon: "📍",
-        title: "Mots-clés locaux",
-        description: "Ciblage des recherches spécifiques au Valais, à Sion et à votre secteur.",
-      },
-      {
-        icon: "🗺️",
-        title: "Google Maps & coordonnées",
-        description: "Votre emplacement et vos coordonnées sont faciles à trouver — pour vos clients comme pour Google.",
-      },
-      {
-        icon: "🔗",
-        title: "Données structurées d'entreprise locale",
-        description: "Un balisage schema.org qui aide Google à comprendre qui vous êtes.",
-      },
-    ],
+  cta: {
+    headline: "Votre entreprise mérite *une meilleure* présence digitale.",
+    body: "Parlons de votre activité et de vos ambitions. Chaque demande est lue personnellement.",
+    button: "Discuter de votre projet",
   },
-  ctaBeforeForm: {
-    headline: "Prêt à moderniser votre présence en ligne ?",
-    subheader: "Obtenez une idée de site gratuite pour votre entreprise — sans pression, sans obligation.",
-    ctaPrimary: "Obtenir mon idée de site gratuite",
-    ctaSecondary: "Voir nos démos d'abord",
-  },
-  contactForm: {
-    headline: "Parlez-nous de votre projet",
-    subheader:
-      "Sans pression. Envoyez les détails de votre entreprise et Nexova vous proposera une direction claire pour votre site.",
-    fields: [
-      { name: "name", label: "Votre nom", type: "text", required: true },
-      { name: "email", label: "Adresse e-mail", type: "email", required: true },
-      { name: "businessName", label: "Nom de l'entreprise", type: "text" },
-      { name: "businessType", label: "Type d'entreprise", type: "text" },
-      {
-        name: "projectType",
-        label: "Type de projet",
-        type: "select",
-        options: [
-          "Choisir une option",
-          "Site une page",
-          "Site complet",
-          "Refonte de site",
-          "Système de réservation",
-          "Mise en place d'automatisation",
-          "Pas encore sûr",
-        ],
-      },
-      {
-        name: "budget",
-        label: "Budget",
-        type: "select",
-        options: ["Choisir une option", "Moins de 500 CHF", "500–1000 CHF", "1000–2000 CHF", "2000+ CHF"],
-      },
-      { name: "message", label: "Votre message", type: "textarea", required: true },
-    ],
-    submitLabel: "Obtenir mon idée de site gratuite",
-    confirmationTitle: "Merci — votre message a bien été reçu.",
-    confirmationBody: "Nous reviendrons vers vous rapidement avec une idée de site gratuite.",
+  contact: {
+    eyebrow: "Contact",
+    headline: "Construisons quelque chose *d'exceptionnel*.",
+    subtitle:
+      "Chaque entreprise est différente. Parlez-nous de votre projet et voyons comment créer une expérience digitale à la hauteur de vos ambitions.",
+    reviewNote: "Chaque demande est examinée personnellement.",
+    emailLabel: "Ou écrivez-nous directement",
+    email: CONTACT_EMAIL,
+    fields: fields({
+      name: "Nom complet",
+      businessName: "Nom de l'entreprise",
+      email: "Adresse e-mail",
+      phone: "Téléphone",
+      website: "Site web actuel",
+      industry: "Secteur d'activité",
+      projectType: "Quel type de projet envisagez-vous ?",
+      projectOptions: ["Nouveau site web", "Refonte de site", "E-commerce", "Système de réservation", "Autre"],
+      message: "Parlez-nous de votre projet",
+      language: "Langue préférée",
+      optional: "facultatif",
+    }),
+    submit: "Envoyer ma demande",
+    sending: "Envoi en cours…",
+    confirmationTitle: "Merci, votre demande nous est bien parvenue.",
+    confirmationBody:
+      "Nous l'examinons personnellement et revenons vers vous dès que possible.",
+    error:
+      "Votre message n'a pas pu être envoyé. Veuillez réessayer ou nous écrire directement par e-mail.",
+    privacyNote:
+      "Vos informations servent uniquement à répondre à votre demande.",
   },
   footer: {
-    brand: "Nexova",
-    tagline:
-      "Des sites web modernes pour les entreprises locales qui veulent une image professionnelle et plus de clients.",
-    location: "Sion, Valais — Suisse",
-    companyLabel: "Entreprise",
+    tagline: "Studio web suisse. Des sites sur mesure pour les entreprises ambitieuses.",
+    navLabel: "Navigation",
     contactLabel: "Contact",
-    links: [
-      { label: "Accueil", href: "#home" },
-      { label: "Services", href: "#services" },
-      { label: "Démos", href: "#demos" },
-      { label: "Processus", href: "#process" },
-      { label: "Contact", href: "#contact" },
-    ],
-    email: "nexova.website@gmail.com",
+    region: "Suisse",
     copyright: "© 2026 Nexova. Tous droits réservés.",
-    builtWith: "Conçu avec précision en Suisse.",
   },
 };
 
 const de: HomeContent = {
   seo: {
-    title: "Nexova — Premium-Websites für lokale Unternehmen in der Schweiz",
+    title: "Nexova — Webdesign und Website-Erstellung in der Schweiz",
     description:
-      "Nexova erstellt moderne, schnelle und mobilfreundliche Websites mit SEO-Grundlagen, Kontaktformularen, Buchungssystemen und einfachen Automatisierungen für lokale Unternehmen in der Schweiz.",
+      "Schweizer Webstudio: massgeschneiderte, professionelle Websites für KMU und ambitionierte Unternehmen. Webdesign, Relaunch und SEO-Grundlagen in der ganzen Schweiz.",
   },
   nav: {
     links: [
-      { label: "Start", href: "#home" },
+      { label: "Ansatz", href: "#approach" },
       { label: "Leistungen", href: "#services" },
-      { label: "Demos", href: "#demos" },
-      { label: "Prozess", href: "#process" },
-      { label: "Kontakt", href: "#contact" },
+      { label: "Projekte", href: "#work" },
+      { label: "Ablauf", href: "#process" },
+      { label: "Über uns", href: "#about" },
     ],
-    cta: "Kostenlose Idee erhalten",
+    cta: "Projekt besprechen",
+    menuOpen: "Menü öffnen",
+    menuClose: "Menü schliessen",
   },
   hero: {
-    headline: "Premium-Websites für lokale Unternehmen in der Schweiz.",
-    body: "Nexova erstellt moderne, schnelle und mobilfreundliche Websites mit SEO-Grundlagen, Kontaktformularen, Buchungssystemen und einfachen Automatisierungen, damit lokale Unternehmen professionell wirken und mehr Kunden gewinnen.",
-    ctaPrimary: "Kostenlose Website-Idee erhalten",
-    ctaSecondary: "Demo-Websites ansehen",
-    bullets: [
-      { icon: "📱", label: "Mobile-First-Design" },
-      { icon: "🔍", label: "SEO-Grundlagen inklusive" },
-      { icon: "📋", label: "Kontakt & Buchung startklar" },
-      { icon: "⚡", label: "Einfache Automatisierungen verfügbar" },
+    eyebrow: "Schweizer Webstudio",
+    headline: "Digitale Exzellenz, *massgeschneidert* für Ihr Unternehmen.",
+    body: "Nexova gestaltet und entwickelt individuelle Websites für ambitionierte Unternehmen: eigenständiges Design, saubere Technik und eine solide SEO-Basis von Anfang an.",
+    ctaPrimary: "Projekt besprechen",
+    ctaSecondary: "Projekte entdecken",
+    keywords: ["Massgeschneidertes Design", "Mobile First", "SEO von Anfang an"],
+  },
+  approach: {
+    eyebrow: "Unser Ansatz",
+    headline: "Keine Vorlage. *Eine Website,* die zu Ihnen passt.",
+    body: "Jedes Unternehmen hat seine eigene Geschichte, seine Kundschaft und seine Ziele. Wir verstehen sie zuerst und gestalten dann eine Website, die dazu passt — nie eine hastig angepasste Schablone.",
+    pillars: [
+      {
+        title: "Persönliche Betreuung",
+        description:
+          "Direkter Austausch vom ersten Gespräch bis zum Livegang. Der Gründer begleitet jedes Projekt persönlich.",
+      },
+      {
+        title: "Individuelles Design",
+        description:
+          "Typografie, Farben, Layout und Bildwelt, entwickelt für Ihre Marke und nicht für einen Katalog.",
+      },
+      {
+        title: "Technische Sorgfalt",
+        description:
+          "Sauberer Code, schnelle Seiten, ein überzeugendes Mobile-Erlebnis und integrierte SEO-Grundlagen.",
+      },
+      {
+        title: "Langfristige Partnerschaft",
+        description:
+          "Auch nach dem Livegang bleiben wir für Sie da, damit Ihre Website mit Ihrem Geschäft wächst.",
+      },
     ],
   },
   services: {
-    headline: "Was wir für Sie erstellen",
-    subheader:
-      "Jede Leistung ist auf lokale Unternehmen zugeschnitten, die online professionell auftreten möchten.",
+    eyebrow: "Leistungen",
+    headline: "Alles für einen *überzeugenden* Auftritt im Web.",
     items: [
       {
-        title: "One-Page-Website",
+        title: "Individuelles Webdesign",
         description:
-          "Eine klare, fokussierte Einzelseite, die Ihr Unternehmen übersichtlich präsentiert und Besucher in Kunden verwandelt. Ideal für einen schnellen Start.",
+          "Eine visuelle Identität und ein Nutzungserlebnis, entwickelt für Ihre Marke und Ihre Kundschaft.",
       },
       {
-        title: "Komplette Website (3–5 Seiten)",
+        title: "Website-Entwicklung",
         description:
-          "Eine vollständige Website mit Startseite, Über uns, Leistungen, Galerie und Kontakt — vollständig responsive. Eine solide Online-Präsenz für Ihr Unternehmen.",
+          "Schnelle, barrierearme und wartbare Websites auf Basis moderner Technologien.",
+      },
+      {
+        title: "Website-Relaunch",
+        description:
+          "Eine bestehende Website neu denken — Auftritt, Struktur, Performance — und bewahren, was funktioniert.",
+      },
+      {
+        title: "Unternehmenswebsites",
+        description:
+          "Ein klarer, professioneller Auftritt, der Ihr Angebot, Ihre Leistungen und Referenzen überzeugend zeigt.",
+      },
+      {
+        title: "Buchung und Terminvergabe",
+        description:
+          "Buchungs- und Terminabläufe, die sich selbstverständlich in Ihre Website einfügen.",
       },
       {
         title: "SEO-Grundlagen",
         description:
-          "Jede Website enthält passende Titel, Meta-Beschreibungen, Überschriftenstruktur und lokale Keywords. So werden Sie bei Google lokal gefunden.",
-      },
-      {
-        title: "Kontaktformulare",
-        description:
-          "Ein professionelles Kontaktformular, das Anfragen direkt in Ihr E-Mail-Postfach sendet. Verpassen Sie nie wieder einen potenziellen Kunden.",
-      },
-      {
-        title: "Buchungssysteme",
-        description:
-          "Lassen Sie Kunden Termine direkt auf Ihrer Website buchen. Sparen Sie Zeit und reduzieren Sie Telefonanrufe.",
-      },
-      {
-        title: "Website-Automatisierungen",
-        description:
-          "Verbinden Sie Ihr Formular mit E-Mail, Google Sheets, Kalender oder automatischen Antworten. Führen Sie Ihr Unternehmen smarter.",
-      },
-      {
-        title: "Monatliche Wartung",
-        description:
-          "Wir halten Ihre Website aktuell, sicher und reibungslos laufend — jeden Monat. Konzentrieren Sie sich auf Ihr Geschäft, nicht auf Ihre Website.",
+          "Struktur, Inhalte und Technik, damit Ihre Website in Suchmaschinen gut gefunden wird.",
       },
     ],
   },
-  demosSection: {
-    headline: "Echte Website-Konzepte, die wir umsetzen",
-    subheader:
-      "Überzeugen Sie sich von unserer Qualität. Jede Demo steht für einen realen Projekttyp, den wir für Ihr Unternehmen umsetzen können.",
-    linkLabel: "Demo ansehen →",
-  },
-  whyChoose: {
-    headline: "Warum lokale Unternehmen sich für Nexova entscheiden",
-    subheader:
-      "Wir verstehen lokale Unternehmen. Wir wissen, worauf es für Restaurants, Coaches, Lehrpersonen und Geschäfte in der Schweiz ankommt.",
-    items: [
+  work: {
+    eyebrow: "Projekte",
+    headline: "Konzepte, entwickelt *wie echte Projekte*.",
+    note: "Diese vier Projekte sind konzeptionelle Demonstrationen von Nexova. Es handelt sich nicht um reale Kunden. Die vollständigen Vorschauen sind in Vorbereitung.",
+    status: "Vorschau in Vorbereitung",
+    projects: [
       {
-        icon: "🇨🇭",
-        title: "Schweizer Qualität",
-        description: "Sauber, präzise, zuverlässig. Jede Website erfüllt die Standards, die Ihre Kunden erwarten.",
+        id: "valmont",
+        name: "Valmont Automobiles",
+        industry: "Premium-Autowerkstatt",
+        concept:
+          "Ein dunkler, filmischer Auftritt für eine exklusive Werkstatt: Fahrzeuggalerie, Leistungsübersicht und diskrete Kontaktaufnahme.",
       },
       {
-        icon: "📱",
-        title: "Immer Mobile-First",
-        description: "Die meisten Ihrer Kunden suchen mobil. Ihre Website funktioniert auf jedem Bildschirm einwandfrei.",
+        id: "orme",
+        name: "Studio Orme",
+        industry: "Architektur und Bau",
+        concept:
+          "Eine redaktionelle, minimalistische Website, auf der Architekturfotografie jedes Projekt erzählt — vom Plan bis zur Übergabe.",
       },
       {
-        icon: "🎯",
-        title: "Auf Conversion ausgelegt",
-        description: "Jede Design-Entscheidung zielt darauf ab, Besucher in Kunden zu verwandeln.",
+        id: "aurele",
+        name: "Maison Aurèle",
+        industry: "Beautysalon",
+        concept:
+          "Eine sanfte, elegante Identität mit einfacher Online-Buchung und sorgfältig komponierten Interieur-Bildern.",
       },
       {
-        icon: "⚡",
-        title: "Schnelle Lieferung",
-        description: "Wir arbeiten effizient. Sie erhalten eine professionelle Website ohne monatelange Wartezeit.",
-      },
-      {
-        icon: "💬",
-        title: "Klare Kommunikation",
-        description: "Kein Fachjargon. Wir sprechen klar und halten Sie bei jedem Schritt auf dem Laufenden.",
-      },
-      {
-        icon: "🔧",
-        title: "Einfach zu aktualisieren",
-        description:
-          "Ihre Website bleibt frisch. Wir kümmern uns um Updates, damit Sie sich auf Ihr Kerngeschäft konzentrieren können.",
+        id: "verdane",
+        name: "Verdane Paysages",
+        industry: "Landschaftsbau und Aussengestaltung",
+        concept:
+          "Ein immersives Erlebnis in grossen Formaten und natürlichen Farben, das Gärten und Projekte in Szene setzt.",
       },
     ],
   },
   process: {
-    headline: "So arbeiten wir",
-    subheader: "Ein einfacher, klarer Prozess vom Erstkontakt bis zum Launch.",
+    eyebrow: "Ablauf",
+    headline: "Ein klarer Weg *von der ersten Idee* bis zum Livegang.",
+    body: "Jeder Schritt hat ein konkretes Ziel. Sie wissen jederzeit, wo Ihr Projekt steht und was als Nächstes folgt.",
     steps: [
-      {
-        title: "Kostenlose Idee",
-        description:
-          "Wir prüfen Ihr Unternehmen und schlagen eine moderne Website-Richtung vor — komplett kostenlos und unverbindlich.",
-      },
-      {
-        title: "Design & Entwicklung",
-        description:
-          "Wir erstellen eine saubere, responsive, professionelle Website, abgestimmt auf Ihre Marke und Kunden.",
-      },
-      {
-        title: "SEO & Automatisierungen",
-        description:
-          "Wir ergänzen bei Bedarf SEO-Grundlagen, Kontaktformulare, Buchungstools oder einfache Automatisierungen.",
-      },
-      {
-        title: "Launch & Support",
-        description:
-          "Ihre Website geht live und kann monatlich gewartet werden, damit sie frisch und funktionsfähig bleibt.",
-      },
+      { title: "Entdeckung", description: "Ihr Geschäft, Ihre Kundschaft und Ihre Ziele verstehen." },
+      { title: "Strategie", description: "Die digitale Richtung festlegen: Struktur, Botschaft, Prioritäten." },
+      { title: "Design", description: "Das visuelle Erlebnis gestalten — vom ersten Screen bis ins Detail." },
+      { title: "Entwicklung", description: "Die Website sorgfältig bauen: Performance, Zugänglichkeit, Mobile." },
+      { title: "Livegang", description: "Testen, verfeinern und mit Sorgfalt veröffentlichen." },
+      { title: "Betreuung", description: "Nach dem Livegang für Sie da, wenn Sie uns brauchen." },
     ],
   },
-  automations: {
-    headline: "Einfache Automatisierungen, die Ihnen Zeit sparen",
-    subheader: "Verbinden Sie Ihre Website mit den Tools, die Sie bereits nutzen. Keine Komplexität, nur Ergebnisse.",
-    cta: "Mehr über Automatisierungen erfahren →",
-    items: [
-      "Kontaktformular an Ihr E-Mail-Postfach",
-      "Kontaktformular an Google Sheets",
-      "Automatische Bestätigungs-E-Mail an Ihren Kunden",
-      "Anbindung an ein Buchungssystem",
-      "Anbindung an Google Calendar",
-      "Bewertungsanfrage nach dem Termin",
-      "Lead-Benachrichtigung auf Ihr Telefon oder per E-Mail",
+  about: {
+    eyebrow: "Über uns",
+    headline: "Ein Schweizer Webstudio, *direkter Kontakt*.",
+    body: [
+      "Nexova ist ein modernes Webstudio mit einer einfachen Überzeugung: Ein seriöses Unternehmen verdient eine Website nach seinem Mass — keine Standardvorlage.",
+      "Der Gründer ist persönlich in jedes Projekt und jede Kundenbeziehung eingebunden. Sie wissen immer, mit wem Sie sprechen.",
     ],
   },
-  seoSection: {
-    headline: "SEO-Grundlagen, in jede Website integriert",
-    subheader: "Wir bauen nicht einfach Websites — wir bauen Websites, die gefunden werden.",
-    items: [
-      {
-        icon: "🏷️",
-        title: "Optimierte Titel & Meta-Beschreibungen",
-        description: "Jede Seite hat einen einzigartigen, keyword-reichen Titel und eine Beschreibung.",
-      },
-      {
-        icon: "📐",
-        title: "Passende Überschriftenstruktur",
-        description: "Klare H1-, H2-, H3-Struktur — für Nutzer wie für Suchmaschinen.",
-      },
-      {
-        icon: "⚡",
-        title: "Schnelle mobile Seiten",
-        description: "Optimierte Performance auf allen Geräten für ein besseres Ranking.",
-      },
-      {
-        icon: "🖼️",
-        title: "Alt-Text für Bilder",
-        description: "Jedes Bild ist beschriftet, damit Suchmaschinen Ihren Inhalt verstehen.",
-      },
-      {
-        icon: "📍",
-        title: "Lokale Keywords",
-        description: "Ausrichtung auf Suchanfragen speziell für Wallis, Sion und Ihre Branche.",
-      },
-      {
-        icon: "🗺️",
-        title: "Google Maps & Kontaktdaten",
-        description: "Ihr Standort und Ihre Kontaktdaten sind leicht zu finden — für Kunden wie für Google.",
-      },
-      {
-        icon: "🔗",
-        title: "Strukturierte Daten für lokale Unternehmen",
-        description: "Schema-Markup, das Google hilft zu verstehen, wer Sie sind.",
-      },
-    ],
+  cta: {
+    headline: "Ihr Unternehmen verdient *einen besseren* digitalen Auftritt.",
+    body: "Sprechen wir über Ihr Geschäft und Ihre Ziele. Jede Anfrage wird persönlich gelesen.",
+    button: "Projekt besprechen",
   },
-  ctaBeforeForm: {
-    headline: "Bereit, Ihren Online-Auftritt zu modernisieren?",
-    subheader: "Holen Sie sich eine kostenlose Website-Idee für Ihr Unternehmen — ohne Druck, ohne Verpflichtung.",
-    ctaPrimary: "Meine kostenlose Website-Idee erhalten",
-    ctaSecondary: "Zuerst unsere Demos ansehen",
-  },
-  contactForm: {
-    headline: "Erzählen Sie uns von Ihrem Projekt",
-    subheader:
-      "Kein Druck. Senden Sie uns die Details zu Ihrem Unternehmen und Nexova schlägt eine klare Richtung für Ihre Website vor.",
-    fields: [
-      { name: "name", label: "Ihr Name", type: "text", required: true },
-      { name: "email", label: "E-Mail-Adresse", type: "email", required: true },
-      { name: "businessName", label: "Firmenname", type: "text" },
-      { name: "businessType", label: "Art des Unternehmens", type: "text" },
-      {
-        name: "projectType",
-        label: "Projektart",
-        type: "select",
-        options: [
-          "Option wählen",
-          "One-Page-Website",
-          "Komplette Website",
-          "Website-Redesign",
-          "Buchungssystem",
-          "Einrichtung von Automatisierungen",
-          "Noch unsicher",
-        ],
-      },
-      {
-        name: "budget",
-        label: "Budget",
-        type: "select",
-        options: ["Option wählen", "Unter 500 CHF", "500–1000 CHF", "1000–2000 CHF", "2000+ CHF"],
-      },
-      { name: "message", label: "Ihre Nachricht", type: "textarea", required: true },
-    ],
-    submitLabel: "Meine kostenlose Website-Idee erhalten",
-    confirmationTitle: "Danke — Ihre Nachricht wurde empfangen.",
-    confirmationBody: "Wir melden uns in Kürze mit einer kostenlosen Website-Idee bei Ihnen.",
+  contact: {
+    eyebrow: "Kontakt",
+    headline: "Gestalten wir etwas *Aussergewöhnliches*.",
+    subtitle:
+      "Jedes Unternehmen ist anders. Erzählen Sie uns von Ihrem Projekt, und wir klären gemeinsam, wie ein digitaler Auftritt entsteht, der Ihren Ansprüchen gerecht wird.",
+    reviewNote: "Jede Anfrage wird persönlich geprüft.",
+    emailLabel: "Oder schreiben Sie uns direkt",
+    email: CONTACT_EMAIL,
+    fields: fields({
+      name: "Vollständiger Name",
+      businessName: "Unternehmen",
+      email: "E-Mail-Adresse",
+      phone: "Telefon",
+      website: "Aktuelle Website",
+      industry: "Branche",
+      projectType: "Welche Art von Projekt planen Sie?",
+      projectOptions: ["Neue Website", "Website-Relaunch", "E-Commerce", "Buchungssystem", "Anderes"],
+      message: "Erzählen Sie uns von Ihrem Projekt",
+      language: "Bevorzugte Sprache",
+      optional: "optional",
+    }),
+    submit: "Anfrage senden",
+    sending: "Wird gesendet…",
+    confirmationTitle: "Vielen Dank, Ihre Anfrage ist bei uns eingegangen.",
+    confirmationBody:
+      "Wir prüfen sie persönlich und melden uns so bald wie möglich bei Ihnen.",
+    error:
+      "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.",
+    privacyNote:
+      "Ihre Angaben verwenden wir ausschliesslich, um Ihre Anfrage zu beantworten.",
   },
   footer: {
-    brand: "Nexova",
-    tagline: "Moderne Websites für lokale Unternehmen, die professionell auftreten und mehr Kunden gewinnen möchten.",
-    location: "Sion, Wallis — Schweiz",
-    companyLabel: "Unternehmen",
+    tagline: "Schweizer Webstudio. Individuelle Websites für ambitionierte Unternehmen.",
+    navLabel: "Navigation",
     contactLabel: "Kontakt",
-    links: [
-      { label: "Start", href: "#home" },
-      { label: "Leistungen", href: "#services" },
-      { label: "Demos", href: "#demos" },
-      { label: "Prozess", href: "#process" },
-      { label: "Kontakt", href: "#contact" },
-    ],
-    email: "nexova.website@gmail.com",
+    region: "Schweiz",
     copyright: "© 2026 Nexova. Alle Rechte vorbehalten.",
-    builtWith: "Mit Präzision in der Schweiz entwickelt.",
   },
 };
 
-export const homeContent: Record<Locale, HomeContent> = { en, fr, de };
+const en: HomeContent = {
+  seo: {
+    title: "Nexova — Premium Web Design & Development in Switzerland",
+    description:
+      "Swiss web studio creating bespoke, high-performance websites for ambitious businesses. Premium web design, website redesign and SEO foundations in Switzerland.",
+  },
+  nav: {
+    links: [
+      { label: "Approach", href: "#approach" },
+      { label: "Services", href: "#services" },
+      { label: "Work", href: "#work" },
+      { label: "Process", href: "#process" },
+      { label: "About", href: "#about" },
+    ],
+    cta: "Discuss your project",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+  },
+  hero: {
+    eyebrow: "Swiss web studio",
+    headline: "Digital excellence, *built around* your business.",
+    body: "Nexova designs and builds bespoke websites for ambitious businesses: distinctive design, rigorous engineering and SEO foundations in place from day one.",
+    ctaPrimary: "Discuss your project",
+    ctaSecondary: "Explore our work",
+    keywords: ["Bespoke design", "Mobile-first", "SEO built in"],
+  },
+  approach: {
+    eyebrow: "Our approach",
+    headline: "No templates. *A website shaped* around your business.",
+    body: "Every business has its own story, its own clients and its own ambitions. We start by understanding them, then design a website that reflects them — never a template adapted in a hurry.",
+    pillars: [
+      {
+        title: "A personal approach",
+        description:
+          "Direct conversation from the first call to launch. The founder follows every project personally.",
+      },
+      {
+        title: "Bespoke design",
+        description:
+          "Typography, colour, layout and imagery composed for your brand, not for a catalogue.",
+      },
+      {
+        title: "Technical rigour",
+        description:
+          "Clean code, fast pages, a considered mobile experience and SEO foundations built in.",
+      },
+      {
+        title: "A lasting relationship",
+        description:
+          "Once the site is live, we stay available so it can grow with your business.",
+      },
+    ],
+  },
+  services: {
+    eyebrow: "Services",
+    headline: "Everything a *serious* online presence needs.",
+    items: [
+      {
+        title: "Bespoke website design",
+        description:
+          "A visual identity and an experience designed for your brand and your clients.",
+      },
+      {
+        title: "Website development",
+        description:
+          "Fast, accessible, maintainable websites built with modern technology.",
+      },
+      {
+        title: "Website redesign",
+        description:
+          "Rethinking an existing site — image, structure, performance — without losing what works.",
+      },
+      {
+        title: "Business websites",
+        description:
+          "A clear, professional presence that showcases your business, services and references.",
+      },
+      {
+        title: "Booking and reservations",
+        description:
+          "Booking and appointment journeys integrated naturally into your website.",
+      },
+      {
+        title: "SEO foundations",
+        description:
+          "Structure, content and technical groundwork so your site can be found.",
+      },
+    ],
+  },
+  work: {
+    eyebrow: "Selected work",
+    headline: "Concepts designed *like real projects*.",
+    note: "These four projects are conceptual demonstrations created by Nexova. They are not real clients. Full previews are in preparation.",
+    status: "Preview in preparation",
+    projects: [
+      {
+        id: "valmont",
+        name: "Valmont Automobiles",
+        industry: "Luxury automotive garage",
+        concept:
+          "A dark, cinematic showcase for a high-end workshop: vehicle gallery, service presentation, discreet enquiry.",
+      },
+      {
+        id: "orme",
+        name: "Studio Orme",
+        industry: "Architecture and construction",
+        concept:
+          "An editorial, minimal site where architectural photography tells each project, from plan to handover.",
+      },
+      {
+        id: "aurele",
+        name: "Maison Aurèle",
+        industry: "Beauty salon",
+        concept:
+          "A soft, elegant identity with a simple booking journey and carefully composed interior imagery.",
+      },
+      {
+        id: "verdane",
+        name: "Verdane Paysages",
+        industry: "Landscaping and exterior design",
+        concept:
+          "An immersive, large-format experience in natural tones that presents gardens and completed projects.",
+      },
+    ],
+  },
+  process: {
+    eyebrow: "Process",
+    headline: "A clear path, *from first idea* to launch.",
+    body: "Every step has a precise purpose. You always know where your project stands and what comes next.",
+    steps: [
+      { title: "Discovery", description: "Understanding your business, your clients and your goals." },
+      { title: "Strategy", description: "Defining the digital direction: structure, message and priorities." },
+      { title: "Design", description: "Creating the visual experience, from the first screen to the details." },
+      { title: "Development", description: "Building the site with care: performance, accessibility, mobile." },
+      { title: "Launch", description: "Testing, refining and going live with care." },
+      { title: "Support", description: "Staying available after launch, as you need us." },
+    ],
+  },
+  about: {
+    eyebrow: "About",
+    headline: "A Swiss web studio, *a direct relationship*.",
+    body: [
+      "Nexova is a modern web studio built on a simple conviction: a serious business deserves a website made to its measure, not a generic template.",
+      "The founder is personally involved in every project and every client relationship. You always know who you are talking to.",
+    ],
+  },
+  cta: {
+    headline: "Your business deserves *a better* digital presence.",
+    body: "Let's talk about your business and your ambitions. Every enquiry is read personally.",
+    button: "Discuss your project",
+  },
+  contact: {
+    eyebrow: "Contact",
+    headline: "Let's build something *exceptional*.",
+    subtitle:
+      "Every business is different. Tell us about your project, and let's explore how we can create a digital experience that reflects your ambitions.",
+    reviewNote: "Every enquiry is reviewed personally.",
+    emailLabel: "Or write to us directly",
+    email: CONTACT_EMAIL,
+    fields: fields({
+      name: "Full name",
+      businessName: "Business name",
+      email: "Email address",
+      phone: "Phone",
+      website: "Current website",
+      industry: "Business industry",
+      projectType: "What type of project are you considering?",
+      projectOptions: ["New website", "Website redesign", "E-commerce", "Booking system", "Other"],
+      message: "Tell us about your project",
+      language: "Preferred language",
+      optional: "optional",
+    }),
+    submit: "Send enquiry",
+    sending: "Sending…",
+    confirmationTitle: "Thank you — your enquiry has been received.",
+    confirmationBody:
+      "We will review it personally and come back to you as soon as possible.",
+    error:
+      "Your message could not be sent. Please try again or email us directly.",
+    privacyNote:
+      "Your details are used only to reply to your enquiry.",
+  },
+  footer: {
+    tagline: "Swiss web studio. Bespoke websites for ambitious businesses.",
+    navLabel: "Navigation",
+    contactLabel: "Contact",
+    region: "Switzerland",
+    copyright: "© 2026 Nexova. All rights reserved.",
+  },
+};
+
+export const homeContent: Record<Locale, HomeContent> = { fr, de, en };

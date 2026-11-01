@@ -1,76 +1,92 @@
+/** Strings may contain *emphasis* — rendered as the brand's italic accent. */
+export type ProjectId = "valmont" | "orme" | "aurele" | "verdane";
+
+export interface FormField {
+  name: string;
+  label: string;
+  type: "text" | "email" | "tel" | "url" | "textarea" | "select";
+  required?: boolean;
+  autoComplete?: string;
+  /** For selects: `value` is what the API receives, `label` what the visitor reads. */
+  options?: { value: string; label: string }[];
+  placeholder?: string;
+}
+
 export interface HomeContent {
   seo: { title: string; description: string };
   nav: {
     links: { label: string; href: string }[];
     cta: string;
+    menuOpen: string;
+    menuClose: string;
   };
   hero: {
+    eyebrow: string;
     headline: string;
     body: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    bullets: { icon: string; label: string }[];
+    keywords: string[];
+  };
+  approach: {
+    eyebrow: string;
+    headline: string;
+    body: string;
+    pillars: { title: string; description: string }[];
   };
   services: {
+    eyebrow: string;
     headline: string;
-    subheader: string;
     items: { title: string; description: string }[];
   };
-  demosSection: {
+  work: {
+    eyebrow: string;
     headline: string;
-    subheader: string;
-    linkLabel: string;
-  };
-  whyChoose: {
-    headline: string;
-    subheader: string;
-    items: { icon: string; title: string; description: string }[];
+    note: string;
+    status: string;
+    projects: {
+      id: ProjectId;
+      name: string;
+      industry: string;
+      concept: string;
+    }[];
   };
   process: {
+    eyebrow: string;
     headline: string;
-    subheader: string;
+    body: string;
     steps: { title: string; description: string }[];
   };
-  automations: {
+  about: {
+    eyebrow: string;
     headline: string;
-    subheader: string;
-    cta: string;
-    items: string[];
+    body: string[];
   };
-  seoSection: {
+  cta: {
     headline: string;
-    subheader: string;
-    items: { icon: string; title: string; description: string }[];
+    body: string;
+    button: string;
   };
-  ctaBeforeForm: {
+  contact: {
+    eyebrow: string;
     headline: string;
-    subheader: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
-  };
-  contactForm: {
-    headline: string;
-    subheader: string;
-    fields: {
-      name: string;
-      label: string;
-      type: "text" | "email" | "textarea" | "select";
-      required?: boolean;
-      options?: string[];
-    }[];
-    submitLabel: string;
+    subtitle: string;
+    reviewNote: string;
+    emailLabel: string;
+    email: string;
+    fields: FormField[];
+    submit: string;
+    sending: string;
     confirmationTitle: string;
     confirmationBody: string;
+    error: string;
+    privacyNote: string;
   };
   footer: {
-    brand: string;
     tagline: string;
-    location: string;
-    companyLabel: string;
+    navLabel: string;
     contactLabel: string;
-    links: { label: string; href: string }[];
-    email: string;
+    region: string;
     copyright: string;
-    builtWith: string;
   };
 }

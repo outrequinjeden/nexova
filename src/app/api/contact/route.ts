@@ -7,9 +7,12 @@ const FIELD_LABELS: Record<string, string> = {
   name: "Name",
   email: "Email",
   businessName: "Business name",
-  businessType: "Type of business",
+  phone: "Phone",
+  website: "Website",
+  industry: "Industry",
   projectType: "Project type",
-  budget: "Budget",
+  preferredLanguage: "Preferred language",
+  locale: "Site language",
   message: "Message",
 };
 
@@ -51,6 +54,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
+  // Honeypot: bots fill it, people never see it. Pretend success.
+  if (typeof body.hp === "string" && body.hp.trim()) {
+    return NextResponse.json({ ok: true });
+  }
+
   const name = typeof body.name === "string" ? body.name.trim() : "";
   const email = typeof body.email === "string" ? body.email.trim() : "";
   const message = typeof body.message === "string" ? body.message.trim() : "";
@@ -73,7 +81,7 @@ export async function POST(request: Request) {
     .map(([key, label]) => {
       const value = body[key];
       if (typeof value !== "string" || !value.trim()) return null;
-      return `<tr><td style="padding:4px 12px 4px 0;color:#666;font-weight:600;white-space:nowrap;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:4px 0;">${escapeHtml(value).replace(/\n/g, "<br />")}</td></tr>`;
+      return `<tr><td style="padding:4px 12px 4px 0;color:#666;font-weight:600;white-space:nowrap;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:4px 0;">${escapeHtml(value.slice(0, 4000)).replace(/\n/g, "<br />")}</td></tr>`;
     })
     .filter(Boolean)
     .join("");

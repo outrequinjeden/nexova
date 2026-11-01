@@ -1,63 +1,99 @@
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+"use client";
+
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Wordmark } from "@/components/brand/Logo";
+import { ButtonLink } from "@/components/brand/ButtonLink";
 import { Container } from "@/components/layout/Container";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { homeContent } from "@/data/home/content";
 import type { Locale } from "@/i18n/routing";
-import { Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Header({ locale }: { locale: Locale }) {
   const { nav } = homeContent[locale];
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between">
-        <a href="#home" className="text-lg font-semibold tracking-tight">
-          Nexova
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 text-white transition-colors duration-500",
+        scrolled || open
+          ? "border-b border-white/10 bg-ink/85 backdrop-blur-xl"
+          : "border-b border-transparent",
+      )}
+    >
+      <Container className="flex h-[4.5rem] items-center justify-between">
+        <a href="#top" aria-label="Nexova" onClick={() => setOpen(false)}>
+          <Wordmark />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
           {nav.links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm text-white/65 transition-colors hover:text-white"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-5 lg:flex">
           <LanguageSwitcher currentLocale={locale} href="/" />
-          <Button size="sm" nativeButton={false} render={<a href="#contact" />}>
+          <ButtonLink href="#contact" arrow={false} className="min-h-10 px-5 text-sm">
             {nav.cta}
-          </Button>
+          </ButtonLink>
         </div>
 
-        <Sheet>
-          <SheetTrigger
-            render={<Button variant="ghost" size="icon" className="md:hidden" />}
+        <div className="flex items-center gap-3 lg:hidden">
+          <LanguageSwitcher currentLocale={locale} href="/" />
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? nav.menuClose : nav.menuOpen}
+            onClick={() => setOpen((v) => !v)}
+            className="grid size-11 place-items-center focus-visible:outline-2 focus-visible:outline-royal-bright"
           >
-            <Menu className="size-5" />
-          </SheetTrigger>
-          <SheetContent side="right" className="w-72">
-            <div className="mt-10 flex flex-col gap-6 px-6">
-              {nav.links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <LanguageSwitcher currentLocale={locale} href="/" />
-              <Button nativeButton={false} render={<a href="#contact" />}>{nav.cta}</Button>
-            </div>
-          </SheetContent>
-        </Sheet>
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </Container>
+
+      <div id="mobile-menu" hidden={!open} className="border-t border-white/10 bg-ink lg:hidden">
+        <Container className="flex flex-col py-6">
+          {nav.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="border-b border-white/10 py-4 font-display text-3xl"
+            >
+              {link.label}
+            </a>
+          ))}
+          <ButtonLink href="#contact" className="mt-6" arrow={false}>
+            {nav.cta}
+          </ButtonLink>
+        </Container>
+      </div>
     </header>
   );
 }

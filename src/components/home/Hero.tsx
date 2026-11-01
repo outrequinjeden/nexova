@@ -1,69 +1,90 @@
-"use client";
-
-import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
+import { Accent } from "@/components/brand/Accent";
+import { ButtonLink } from "@/components/brand/ButtonLink";
 import { Container } from "@/components/layout/Container";
+import { SectionLabel } from "@/components/layout/SectionLabel";
 import { homeContent } from "@/data/home/content";
 import type { Locale } from "@/i18n/routing";
-import { LogoEmblem } from "./LogoEmblem";
+
+/** Orbit motif — two hairline rings and a single node. Pure SVG + CSS, no JS. */
+function Orbit() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 800 800"
+      className="pointer-events-none absolute -right-[38%] opacity-60 sm:opacity-100 top-1/2 w-[130vw] max-w-[1100px] -translate-y-1/2 sm:-right-[22%] sm:w-[85vw] lg:-right-[8%] lg:w-[62vw]"
+      fill="none"
+    >
+      <defs>
+        <radialGradient id="nx-core" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stopColor="#5a2bd4" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#5a2bd4" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="400" cy="400" r="330" fill="url(#nx-core)" />
+      <g className="nx-orbit">
+        <circle cx="400" cy="400" r="300" stroke="white" strokeOpacity="0.14" />
+        <circle cx="700" cy="400" r="7" fill="#a78bfa" />
+        <circle cx="700" cy="400" r="18" stroke="#a78bfa" strokeOpacity="0.35" />
+      </g>
+      <g className="nx-orbit-rev">
+        <circle cx="400" cy="400" r="215" stroke="white" strokeOpacity="0.09" />
+        <circle cx="185" cy="400" r="4" fill="white" fillOpacity="0.7" />
+      </g>
+      <circle cx="400" cy="400" r="130" stroke="white" strokeOpacity="0.07" />
+    </svg>
+  );
+}
 
 export function Hero({ locale }: { locale: Locale }) {
   const { hero } = homeContent[locale];
 
   return (
     <section
-      id="home"
-      className="relative flex min-h-[90vh] items-center overflow-hidden py-24 text-white md:py-32"
+      id="top"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-white"
     >
-      <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto max-w-3xl text-center"
+      {/* hairline grid, faded toward the edges */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(to_right,white_1px,transparent_1px)] [background-size:calc(100%/6)_100%] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
+      />
+      <Orbit />
+
+      <Container className="relative flex flex-1 flex-col justify-end pb-14 pt-36 md:pb-20">
+        <SectionLabel className="nx-rise text-royal-bright">{hero.eyebrow}</SectionLabel>
+
+        <h1
+          className="nx-rise mt-8 max-w-[15ch] font-display text-[clamp(3.1rem,9.4vw,9rem)] leading-[0.95] tracking-[-0.02em] text-balance"
+          style={{ animationDelay: "0.1s" }}
         >
-          <LogoEmblem className="mx-auto mb-6 w-40 md:w-48" />
-          <h1 className="text-balance text-4xl font-semibold tracking-tight text-glow-shadow md:text-6xl">
-            {hero.headline}
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-white/70 text-glow-shadow">
-            {hero.body}
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button
-              size="lg"
-              className="bg-violet-500 text-white hover:bg-violet-400"
-              nativeButton={false}
-              render={<a href="#contact" />}
-            >
-              {hero.ctaPrimary}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white"
-              nativeButton={false}
-              render={<a href="#demos" />}
-            >
-              {hero.ctaSecondary}
-            </Button>
+          <Accent text={hero.headline} />
+        </h1>
+
+        <div
+          className="nx-rise mt-12 grid gap-10 md:mt-16 lg:grid-cols-[minmax(0,34rem)_1fr] lg:items-end"
+          style={{ animationDelay: "0.25s" }}
+        >
+          <div>
+            <p className="text-lg leading-relaxed text-white/70 md:text-xl">
+              {hero.body}
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="#contact">{hero.ctaPrimary}</ButtonLink>
+              <ButtonLink href="#work" variant="outline">
+                {hero.ctaSecondary}
+              </ButtonLink>
+            </div>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {hero.bullets.map((bullet, i) => (
-              <motion.div
-                key={bullet.label}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}
-                className="flex flex-col items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-3 py-4 text-sm backdrop-blur-sm"
-              >
-                <span className="text-xl">{bullet.icon}</span>
-                <span className="text-white/70">{bullet.label}</span>
-              </motion.div>
+          <ul className="flex flex-wrap gap-x-10 gap-y-3 font-mono text-xs uppercase tracking-[0.16em] text-white/50 lg:justify-end">
+            {hero.keywords.map((k) => (
+              <li key={k} className="flex items-center gap-3">
+                <span aria-hidden="true" className="size-1 rounded-full bg-royal-bright" />
+                {k}
+              </li>
             ))}
-          </div>
-        </motion.div>
+          </ul>
+        </div>
       </Container>
     </section>
   );

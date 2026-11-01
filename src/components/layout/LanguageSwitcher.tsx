@@ -18,6 +18,7 @@ export function LanguageSwitcher({
 
   return (
     <div
+      role="group"
       aria-label={t("label")}
       className={cn(
         "flex items-center gap-1 rounded-full border border-current/15 px-1 py-1 text-xs font-medium",

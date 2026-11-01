@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 import type { DemoContent } from "@/types/demo";
 
-const SITE_URL = "https://nexova-nu.vercel.app";
+export const SITE_URL = "https://nexova-nu.vercel.app";
 
 const OG_LOCALE: Record<Locale, string> = {
   en: "en_US",
