@@ -43,3 +43,26 @@ Read leads: `pnpm leads` (needs the two env vars locally; `vercel env pull` prov
    Without a verified domain Resend only delivers to your own account address.
 
 No key has been created or configured by this codebase.
+
+## Retention, access and deletion policy
+
+* **Retention:** every lead expires automatically from Redis after **24 months** (TTL set on write).
+  Rate-limit keys (salted IP hash) expire within **24 hours**. Notification emails sitting in the
+  inbox must be purged by the same rule — review the mailbox every 6 months.
+* **Access:** only the Upstash account owner and the Vercel project env vars hold the credentials.
+  Tokens are never committed (`.env*` is git-ignored); use `vercel env pull` locally. The website
+  exposes **no endpoint that reads leads** — read access exists only through `pnpm leads`.
+* **Region:** the database must be created in an **EU region** (Frankfurt or Ireland).
+* **Erasure request:** `pnpm leads:delete --email <address>` shows matches (dry run);
+  add `--yes` to delete. Then delete the related emails from the inbox and reply within 30 days.
+* **Preview-only first:** connect the database to the **Preview** and **Development** environments
+  only; Production is connected after explicit approval.
+
+### Provisioning (interactive — terms acceptance needs a human)
+
+```bash
+cd ~/Documents/nexova-site
+vercel integration add upstash/upstash-kv \
+  --name nexova-leads --environment preview --environment development
+# choose: Free plan, an EU region (e.g. eu-central-1 Frankfurt)
+```
