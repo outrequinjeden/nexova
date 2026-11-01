@@ -229,6 +229,10 @@ const fr: HomeContent = {
       "Nous l'examinons personnellement et revenons vers vous dès que possible.",
     error:
       "Votre message n'a pas pu être envoyé. Veuillez réessayer ou nous écrire directement par e-mail.",
+    rateLimited:
+      "Trop de tentatives en peu de temps. Merci de réessayer dans quelques minutes ou de nous écrire directement par e-mail.",
+    invalid:
+      "Certaines informations semblent incomplètes ou invalides. Merci de vérifier le formulaire.",
     privacyNote:
       "Vos informations servent uniquement à répondre à votre demande.",
   },
@@ -236,6 +240,8 @@ const fr: HomeContent = {
     tagline: "Studio web suisse. Des sites sur mesure pour les entreprises ambitieuses.",
     navLabel: "Navigation",
     contactLabel: "Contact",
+    privacy: "Politique de confidentialité",
+    notice: "Mentions légales",
     region: "Suisse",
     copyright: "© 2026 Nexova. Tous droits réservés.",
   },
@@ -420,6 +426,10 @@ const de: HomeContent = {
       "Wir prüfen sie persönlich und melden uns so bald wie möglich bei Ihnen.",
     error:
       "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.",
+    rateLimited:
+      "Zu viele Versuche in kurzer Zeit. Bitte versuchen Sie es in einigen Minuten erneut oder schreiben Sie uns direkt per E-Mail.",
+    invalid:
+      "Einige Angaben scheinen unvollständig oder ungültig zu sein. Bitte prüfen Sie das Formular.",
     privacyNote:
       "Ihre Angaben verwenden wir ausschliesslich, um Ihre Anfrage zu beantworten.",
   },
@@ -427,6 +437,8 @@ const de: HomeContent = {
     tagline: "Schweizer Webstudio. Individuelle Websites für ambitionierte Unternehmen.",
     navLabel: "Navigation",
     contactLabel: "Kontakt",
+    privacy: "Datenschutz",
+    notice: "Impressum",
     region: "Schweiz",
     copyright: "© 2026 Nexova. Alle Rechte vorbehalten.",
   },
@@ -611,6 +623,10 @@ const en: HomeContent = {
       "We will review it personally and come back to you as soon as possible.",
     error:
       "Your message could not be sent. Please try again or email us directly.",
+    rateLimited:
+      "Too many attempts in a short time. Please try again in a few minutes or email us directly.",
+    invalid:
+      "Some details look incomplete or invalid. Please check the form.",
     privacyNote:
       "Your details are used only to reply to your enquiry.",
   },
@@ -618,6 +634,8 @@ const en: HomeContent = {
     tagline: "Swiss web studio. Bespoke websites for ambitious businesses.",
     navLabel: "Navigation",
     contactLabel: "Contact",
+    privacy: "Privacy policy",
+    notice: "Legal notice",
     region: "Switzerland",
     copyright: "© 2026 Nexova. All rights reserved.",
   },

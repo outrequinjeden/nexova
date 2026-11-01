@@ -10,8 +10,17 @@ import { homeContent } from "@/data/home/content";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-export function Header({ locale }: { locale: Locale }) {
+export function Header({
+  locale,
+  home = true,
+  path = "/",
+}: {
+  locale: Locale;
+  home?: boolean;
+  path?: "/" | "/privacy" | "/legal";
+}) {
   const { nav } = homeContent[locale];
+  const base = home ? "" : `/${locale}`;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -39,7 +48,7 @@ export function Header({ locale }: { locale: Locale }) {
       )}
     >
       <Container className="flex h-[4.5rem] items-center justify-between">
-        <a href="#top" aria-label="Nexova" onClick={() => setOpen(false)}>
+        <a href={home ? "#top" : `/${locale}`} aria-label="Nexova" onClick={() => setOpen(false)}>
           <Wordmark />
         </a>
 
@@ -47,7 +56,7 @@ export function Header({ locale }: { locale: Locale }) {
           {nav.links.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={`${base}${link.href}`}
               className="text-sm text-white/65 transition-colors hover:text-white"
             >
               {link.label}
@@ -56,14 +65,14 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
-          <LanguageSwitcher currentLocale={locale} href="/" />
-          <ButtonLink href="#contact" arrow={false} className="min-h-10 px-5 text-sm">
+          <LanguageSwitcher currentLocale={locale} href={path} />
+          <ButtonLink href={`${base}#contact`} arrow={false} className="min-h-10 px-5 text-sm">
             {nav.cta}
           </ButtonLink>
         </div>
 
         <div className="flex items-center gap-3 lg:hidden">
-          <LanguageSwitcher currentLocale={locale} href="/" />
+          <LanguageSwitcher currentLocale={locale} href={path} />
           <button
             type="button"
             aria-expanded={open}
@@ -82,14 +91,14 @@ export function Header({ locale }: { locale: Locale }) {
           {nav.links.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={`${base}${link.href}`}
               onClick={() => setOpen(false)}
               className="border-b border-white/10 py-4 font-display text-3xl"
             >
               {link.label}
             </a>
           ))}
-          <ButtonLink href="#contact" className="mt-6" arrow={false}>
+          <ButtonLink href={`${base}#contact`} className="mt-6" arrow={false}>
             {nav.cta}
           </ButtonLink>
         </Container>

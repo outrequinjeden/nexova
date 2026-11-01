@@ -80,6 +80,8 @@ export interface HomeContent {
     confirmationTitle: string;
     confirmationBody: string;
     error: string;
+    rateLimited: string;
+    invalid: string;
     privacyNote: string;
   };
   footer: {
@@ -87,6 +89,8 @@ export interface HomeContent {
     navLabel: string;
     contactLabel: string;
     region: string;
+    privacy: string;
+    notice: string;
     copyright: string;
   };
 }

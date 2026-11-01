@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:launch": "node scripts/check-launch.mjs",
+    "leads": "node scripts/export-leads.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

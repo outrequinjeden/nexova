@@ -3,8 +3,9 @@ import { Container } from "@/components/layout/Container";
 import { CONTACT_EMAIL, homeContent } from "@/data/home/content";
 import type { Locale } from "@/i18n/routing";
 
-export function Footer({ locale }: { locale: Locale }) {
+export function Footer({ locale, home = true }: { locale: Locale; home?: boolean }) {
   const { footer, nav } = homeContent[locale];
+  const base = home ? "" : `/${locale}`;
 
   return (
     <footer className="bg-ink text-white">
@@ -21,7 +22,7 @@ export function Footer({ locale }: { locale: Locale }) {
           <ul className="mt-5 space-y-3">
             {nav.links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="text-white/75 transition-colors hover:text-white">
+                <a href={`${base}${l.href}`} className="text-white/75 transition-colors hover:text-white">
                   {l.label}
                 </a>
               </li>
@@ -44,8 +45,16 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
       </Container>
 
-      <Container className="border-t border-white/10 py-6 text-xs text-white/40">
+      <Container className="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
         <p>{footer.copyright}</p>
+        <p className="flex gap-6">
+          <a href={`/${locale}/privacy`} className="transition-colors hover:text-white">
+            {footer.privacy}
+          </a>
+          <a href={`/${locale}/legal`} className="transition-colors hover:text-white">
+            {footer.notice}
+          </a>
+        </p>
       </Container>
     </footer>
   );
