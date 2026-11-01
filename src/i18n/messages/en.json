@@ -1,0 +1,15 @@
+{
+  "Nav": {
+    "backToHome": "Back to Nexova",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  },
+  "NotFound": {
+    "title": "Demo not found",
+    "description": "This demo page does not exist.",
+    "cta": "Back to homepage"
+  }
+}
