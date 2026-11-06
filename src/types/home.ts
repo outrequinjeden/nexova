@@ -1,14 +1,12 @@
 /** Strings may contain *emphasis* — rendered as the brand's italic accent. */
-export type ProjectId = "valmont" | "orme" | "aurele" | "verdane";
 
 export interface FormField {
   name: string;
   label: string;
-  type: "text" | "email" | "tel" | "url" | "textarea" | "select";
+  type: "text" | "email" | "tel" | "textarea";
   required?: boolean;
   autoComplete?: string;
-  /** For selects: `value` is what the API receives, `label` what the visitor reads. */
-  options?: { value: string; label: string }[];
+  inputMode?: "text" | "email" | "tel";
   placeholder?: string;
 }
 
@@ -28,12 +26,6 @@ export interface HomeContent {
     ctaSecondary: string;
     keywords: string[];
   };
-  approach: {
-    eyebrow: string;
-    headline: string;
-    body: string;
-    pillars: { title: string; description: string }[];
-  };
   services: {
     eyebrow: string;
     headline: string;
@@ -43,13 +35,27 @@ export interface HomeContent {
     eyebrow: string;
     headline: string;
     note: string;
-    status: string;
-    projects: {
-      id: ProjectId;
+    badge: string;
+    cta: string;
+    ctaLabel: string;
+  };
+  pricing: {
+    eyebrow: string;
+    headline: string;
+    intro: string;
+    fromLabel: string;
+    featuredLabel: string;
+    packages: {
+      id: "vitrine" | "pro";
       name: string;
-      industry: string;
-      concept: string;
+      price: string;
+      description: string;
+      includes: string[];
+      cta: string;
     }[];
+    maintenance: { title: string; body: string };
+    extras: { title: string; body: string; items: string[] };
+    note: string;
   };
   process: {
     eyebrow: string;
@@ -61,6 +67,7 @@ export interface HomeContent {
     eyebrow: string;
     headline: string;
     body: string[];
+    pillars: { title: string; description: string }[];
   };
   cta: {
     headline: string;
@@ -84,6 +91,7 @@ export interface HomeContent {
     invalid: string;
     privacyNote: string;
   };
+  demoNotice: { label: string; text: string; back: string; cta: string };
   footer: {
     tagline: string;
     navLabel: string;

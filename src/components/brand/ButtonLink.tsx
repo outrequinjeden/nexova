@@ -6,6 +6,8 @@ const variants = {
     "bg-royal text-white hover:bg-royal-deep focus-visible:outline-royal-bright",
   light:
     "bg-white text-ink hover:bg-paper focus-visible:outline-white",
+  dark:
+    "bg-ink text-white hover:bg-royal focus-visible:outline-royal",
   outline:
     "border border-white/25 text-white hover:border-white/60 hover:bg-white/5 focus-visible:outline-white",
 } as const;

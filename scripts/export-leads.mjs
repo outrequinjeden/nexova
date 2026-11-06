@@ -27,7 +27,7 @@ const rows = (await pipeline(ids.map((id) => ["GET", `lead:${id}`])))
   .filter((l) => !process.argv.includes("--failed") || l.status === "email_failed");
 
 if (process.argv.includes("--csv")) {
-  const cols = ["createdAt", "status", "name", "businessName", "email", "phone", "website", "industry", "projectType", "preferredLanguage", "message"];
+  const cols = ["createdAt", "status", "name", "businessName", "email", "phone", "locale", "message", "website", "industry", "projectType", "preferredLanguage"];
   const q = (v) => `"${String(v ?? "").replaceAll('"', '""')}"`;
   console.log(cols.join(","));
   for (const l of rows) console.log(cols.map((c) => q(c === "createdAt" || c === "status" ? l[c] : l.data[c])).join(","));

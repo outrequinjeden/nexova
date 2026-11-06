@@ -32,7 +32,7 @@ const PRIVACY_FR: LegalDoc = {
       heading: "2. Données que nous traitons et pourquoi",
       paragraphs: ["Nous ne traitons que les données nécessaires aux finalités suivantes."],
       list: [
-        "Formulaire de contact : nom, entreprise, adresse e-mail, téléphone et site web (facultatifs), secteur d'activité, type de projet, message, langue préférée et langue du site. Finalité : répondre à votre demande et préparer une éventuelle collaboration.",
+        "Formulaire de contact : nom, entreprise, adresse e-mail ou numéro de téléphone, message et langue du site. Finalité : répondre à votre demande et préparer une éventuelle collaboration.",
         "Journaux techniques : adresse IP, date et heure, pages demandées et type de navigateur sont traités par notre hébergeur pour assurer le fonctionnement et la sécurité du site.",
         "Protection contre les abus : une empreinte irréversible (hachage salé) de votre adresse IP sert à limiter le nombre de messages envoyés. Elle est supprimée automatiquement après 24 heures au plus.",
       ],
@@ -106,7 +106,7 @@ const PRIVACY_DE: LegalDoc = {
       heading: "2. Welche Daten wir bearbeiten und wozu",
       paragraphs: ["Wir bearbeiten nur die Daten, die für die folgenden Zwecke nötig sind."],
       list: [
-        "Kontaktformular: Name, Unternehmen, E-Mail-Adresse, Telefon und Website (freiwillig), Branche, Projektart, Nachricht, bevorzugte Sprache und Sprache der Website. Zweck: Ihre Anfrage beantworten und eine mögliche Zusammenarbeit vorbereiten.",
+        "Kontaktformular: Name, Unternehmen, E-Mail-Adresse oder Telefonnummer, Nachricht und Sprache der Website. Zweck: Ihre Anfrage beantworten und eine mögliche Zusammenarbeit vorbereiten.",
         "Technische Protokolle: IP-Adresse, Datum und Uhrzeit, aufgerufene Seiten und Browsertyp werden von unserem Hosting-Anbieter bearbeitet, um Betrieb und Sicherheit der Website zu gewährleisten.",
         "Missbrauchsschutz: Ein nicht umkehrbarer Hashwert (mit Salt) Ihrer IP-Adresse dient dazu, die Zahl der gesendeten Nachrichten zu begrenzen. Er wird spätestens nach 24 Stunden automatisch gelöscht.",
       ],
@@ -178,7 +178,7 @@ const PRIVACY_EN: LegalDoc = {
       heading: "2. Data we process and why",
       paragraphs: ["We only process the data needed for the following purposes."],
       list: [
-        "Contact form: name, business, email address, phone and website (optional), industry, project type, message, preferred language and site language. Purpose: answering your enquiry and preparing a possible collaboration.",
+        "Contact form: name, business, email address or phone number, message and site language. Purpose: answering your enquiry and preparing a possible collaboration.",
         "Technical logs: IP address, date and time, requested pages and browser type are processed by our hosting provider to run and secure the site.",
         "Abuse protection: an irreversible salted hash of your IP address is used to limit how many messages can be sent. It is deleted automatically after 24 hours at most.",
       ],

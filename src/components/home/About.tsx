@@ -27,6 +27,17 @@ export function About({ locale }: { locale: Locale }) {
               </Reveal>
             ))}
           </div>
+          <ul className="mt-14 grid gap-px border border-ink/15 bg-ink/15 md:grid-cols-3">
+            {about.pillars.map((pillar, i) => (
+              <li key={pillar.title} className="bg-paper-deep p-7">
+                <Reveal delay={0.06 * i}>
+                  <p className="font-mono text-xs text-royal">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-4 font-display text-2xl">{pillar.title}</h3>
+                  <p className="mt-2 leading-relaxed text-stone">{pillar.description}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>

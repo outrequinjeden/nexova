@@ -5,10 +5,6 @@ const LABELS: [keyof ContactInput, string][] = [
   ["businessName", "Business"],
   ["email", "Email"],
   ["phone", "Phone"],
-  ["website", "Website"],
-  ["industry", "Industry"],
-  ["projectType", "Project type"],
-  ["preferredLanguage", "Preferred language"],
   ["locale", "Site language"],
   ["message", "Message"],
 ];
@@ -36,7 +32,7 @@ function render(data: ContactInput, id: string) {
  */
 export async function sendLeadEmail(data: ContactInput, id: string): Promise<boolean> {
   const to = process.env.CONTACT_EMAIL ?? "nexova.website@gmail.com";
-  const subject = `New enquiry — ${data.businessName} (${data.projectType})`;
+  const subject = `New enquiry — ${data.businessName}`;
   const { html, text } = render(data, id);
 
   try {
@@ -51,7 +47,7 @@ export async function sendLeadEmail(data: ContactInput, id: string): Promise<boo
         body: JSON.stringify({
           from: process.env.CONTACT_FROM_EMAIL ?? "Nexova <onboarding@resend.dev>",
           to: [to],
-          reply_to: data.email,
+          ...(data.email ? { reply_to: data.email } : {}),
           subject,
           html,
           text,

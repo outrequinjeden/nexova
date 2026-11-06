@@ -3,105 +3,53 @@ import type { FormField, HomeContent } from "@/types/home";
 
 export const CONTACT_EMAIL = "nexova.website@gmail.com";
 
-/** Option values are the English labels the API / inbox will read. */
-const PROJECT_VALUES = [
-  "New website",
-  "Website redesign",
-  "E-commerce",
-  "Booking system",
-  "Other",
-];
-
-const LANGUAGE_OPTIONS = [
-  { value: "Français", label: "Français" },
-  { value: "Deutsch", label: "Deutsch" },
-  { value: "English", label: "English" },
-];
-
 function fields(t: {
   name: string;
   businessName: string;
-  email: string;
-  phone: string;
-  website: string;
-  industry: string;
-  projectType: string;
-  projectOptions: string[];
+  contact: string;
+  contactHint: string;
   message: string;
-  language: string;
-  optional: string;
 }): FormField[] {
   return [
     { name: "name", label: t.name, type: "text", required: true, autoComplete: "name" },
     { name: "businessName", label: t.businessName, type: "text", required: true, autoComplete: "organization" },
-    { name: "email", label: t.email, type: "email", required: true, autoComplete: "email" },
-    { name: "phone", label: `${t.phone} (${t.optional})`, type: "tel", autoComplete: "tel" },
-    { name: "website", label: `${t.website} (${t.optional})`, type: "url", autoComplete: "url", placeholder: "https://" },
-    { name: "industry", label: t.industry, type: "text", required: true },
     {
-      name: "projectType",
-      label: t.projectType,
-      type: "select",
+      name: "contact",
+      label: t.contact,
+      type: "text",
       required: true,
-      options: PROJECT_VALUES.map((value, i) => ({ value, label: t.projectOptions[i] })),
+      autoComplete: "email",
+      placeholder: t.contactHint,
     },
     { name: "message", label: t.message, type: "textarea", required: true },
-    { name: "preferredLanguage", label: t.language, type: "select", options: LANGUAGE_OPTIONS },
   ];
 }
 
 const fr: HomeContent = {
   seo: {
-    title: "Nexova — Création de sites web sur mesure en Suisse",
+    title: "Nexova — Sites web professionnels pour PME suisses",
     description:
-      "Studio web suisse : création de sites internet professionnels, refonte de sites web et SEO pour PME et entreprises ambitieuses en Suisse romande et alémanique.",
+      "Nexova crée des sites web modernes pour les PME suisses, en Suisse romande : design professionnel, visibilité locale et demandes clients simplifiées. Site vitrine dès CHF 750.",
   },
   nav: {
     links: [
-      { label: "Approche", href: "#approach" },
       { label: "Services", href: "#services" },
       { label: "Réalisations", href: "#work" },
+      { label: "Tarifs", href: "#pricing" },
       { label: "Processus", href: "#process" },
       { label: "À propos", href: "#about" },
     ],
-    cta: "Discuter de votre projet",
+    cta: "Discuter de mon projet",
     menuOpen: "Ouvrir le menu",
     menuClose: "Fermer le menu",
   },
   hero: {
-    eyebrow: "Studio web suisse",
-    headline: "L'excellence digitale, *construite autour* de votre entreprise.",
-    body: "Nexova conçoit et développe des sites sur mesure pour les entreprises ambitieuses : un design singulier, une technique rigoureuse et des bases de référencement posées dès le départ.",
-    ctaPrimary: "Discuter de votre projet",
-    ctaSecondary: "Découvrir nos réalisations",
-    keywords: ["Design sur mesure", "Pensé pour le mobile", "SEO dès la conception"],
-  },
-  approach: {
-    eyebrow: "Notre approche",
-    headline: "Pas de modèle. *Un site pensé* pour votre activité.",
-    body: "Chaque entreprise a sa propre histoire, ses clients et ses ambitions. Nous commençons par les comprendre, puis nous concevons un site qui leur ressemble — jamais un gabarit adapté à la hâte.",
-    pillars: [
-      {
-        title: "Une approche personnalisée",
-        description:
-          "Un échange direct, du premier rendez-vous à la mise en ligne. Le fondateur suit personnellement chaque projet.",
-      },
-      {
-        title: "Un design sur mesure",
-        description:
-          "Typographie, couleurs, mise en page et images composées pour votre marque, pas pour un catalogue.",
-      },
-      {
-        title: "Une exigence technique",
-        description:
-          "Un code propre, des pages rapides, une expérience mobile soignée et des bases SEO intégrées.",
-      },
-      {
-        title: "Une relation durable",
-        description:
-          "Une fois le site en ligne, nous restons disponibles pour qu'il évolue avec votre activité.",
-      },
-    ],
+    eyebrow: "Agence web pour PME suisses",
+    headline: "Votre entreprise mérite une présence en ligne *à la hauteur* de son savoir-faire.",
+    body: "Nexova crée des sites web modernes pour les PME suisses. Design professionnel, visibilité locale et demandes clients simplifiées.",
+    ctaPrimary: "Discuter de mon projet",
+    ctaSecondary: "Voir nos réalisations",
+    keywords: ["Design sur mesure", "Pensé pour le mobile", "Prix transparents"],
   },
   services: {
     eyebrow: "Services",
@@ -141,39 +89,64 @@ const fr: HomeContent = {
   },
   work: {
     eyebrow: "Réalisations",
-    headline: "Des concepts conçus *comme de vrais projets*.",
-    note: "Ces quatre projets sont des démonstrations conceptuelles imaginées par Nexova. Ce ne sont pas des clients réels. Les aperçus complets sont en préparation.",
-    status: "Aperçu en préparation",
-    projects: [
+    headline: "Quatre démonstrations, *conçues comme de vrais sites*.",
+    note: "Ce sont des concepts fictifs créés par Nexova pour montrer notre travail. Ils ne représentent pas des clients réels : les entreprises, avis, coordonnées et certifications qui y figurent sont des exemples.",
+    badge: "Concept fictif",
+    cta: "Voir la démo",
+    ctaLabel: "Voir la démo de",
+  },
+  pricing: {
+    eyebrow: "Tarifs",
+    headline: "Deux formules, *des prix clairs*.",
+    intro: "Choisissez le point de départ qui correspond à votre activité. Nous affinons ensuite ensemble selon vos besoins.",
+    fromLabel: "à partir de",
+    featuredLabel: "Le plus complet",
+    packages: [
       {
-        id: "valmont",
-        name: "Valmont Automobiles",
-        industry: "Garage automobile de prestige",
-        concept:
-          "Une vitrine sombre et cinématique pour un atelier haut de gamme : galerie de véhicules, présentation des prestations, prise de contact discrète.",
+        id: "vitrine",
+        name: "Site vitrine",
+        price: "CHF 750.–",
+        description: "Pour présenter clairement votre entreprise et permettre à vos clients de vous contacter.",
+        includes: [
+          "Design sur mesure aux couleurs de votre entreprise",
+          "Affichage soigné sur mobile, tablette et ordinateur",
+          "Présentation de votre activité, de vos services et de vos coordonnées",
+          "Formulaire de contact",
+          "Bases de référencement local (SEO)",
+          "Mise en ligne du site",
+        ],
+        cta: "Demander ce site",
       },
       {
-        id: "orme",
-        name: "Studio Orme",
-        industry: "Architecture et construction",
-        concept:
-          "Un site éditorial et minimal où la photographie d'architecture raconte chaque projet, du plan à la livraison.",
-      },
-      {
-        id: "aurele",
-        name: "Maison Aurèle",
-        industry: "Salon de beauté",
-        concept:
-          "Une identité douce et élégante, un parcours de réservation simple et des visuels d'intérieur soignés.",
-      },
-      {
-        id: "verdane",
-        name: "Verdane Paysages",
-        industry: "Paysagisme et aménagements extérieurs",
-        concept:
-          "Une expérience immersive en grands formats, aux teintes naturelles, pour présenter jardins et réalisations.",
+        id: "pro",
+        name: "Site professionnel",
+        price: "CHF 1'250.–",
+        description: "Pour une présence plus complète, avec davantage de contenu et de fonctionnalités.",
+        includes: [
+          "Tout ce qui est compris dans le site vitrine",
+          "Structure plus étendue : pages de services et de contenus supplémentaires",
+          "Fonctionnalités adaptées à votre activité, par exemple une prise de rendez-vous ou une réservation (selon le projet)",
+          "Bases SEO adaptées à la structure du site",
+        ],
+        cta: "Demander ce site",
       },
     ],
+    maintenance: {
+      title: "Maintenance mensuelle",
+      body: "Proposée en option, séparément du prix du site, pour garder votre site à jour après la mise en ligne. Le tarif vous est communiqué dans le devis.",
+    },
+    extras: {
+      title: "Services additionnels",
+      body: "Facturés séparément, sur devis, uniquement si vous en avez besoin :",
+      items: [
+        "Pages supplémentaires",
+        "Système de réservation ou de prise de rendez-vous",
+        "Boutique en ligne",
+        "Refonte d'un site existant",
+        "Modifications après la mise en ligne",
+      ],
+    },
+    note: "Prix de départ en francs suisses. Le tarif définitif dépend de votre projet et vous est confirmé par un devis avant tout engagement.",
   },
   process: {
     eyebrow: "Processus",
@@ -190,37 +163,36 @@ const fr: HomeContent = {
   },
   about: {
     eyebrow: "À propos",
-    headline: "Un studio web suisse, *une relation directe*.",
+    headline: "Une agence digitale indépendante, *au service des PME suisses*.",
     body: [
-      "Nexova est un studio web moderne, né d'une conviction simple : une entreprise sérieuse mérite un site à son image, pas un modèle générique.",
-      "Le fondateur est personnellement impliqué dans chaque projet et dans chaque relation client. Vous savez toujours à qui vous parlez.",
+      "Nexova est une agence digitale indépendante. Nous créons des sites web pour les PME suisses, en particulier en Suisse romande, avec une conviction simple : une entreprise sérieuse mérite un site à son image, pas un modèle générique.",
+      "Le fondateur suit personnellement chaque projet. Vous savez toujours à qui vous parlez, sans intermédiaire.",
+    ],
+    pillars: [
+      { title: "Communication directe", description: "Un seul interlocuteur, des réponses claires, du premier échange à la mise en ligne." },
+      { title: "Solutions sur mesure", description: "Un site pensé pour votre activité et vos clients, pas un gabarit adapté à la hâte." },
+      { title: "Prix transparents", description: "Des tarifs affichés, un devis détaillé et aucune surprise en cours de route." },
     ],
   },
   cta: {
     headline: "Votre entreprise mérite *une meilleure* présence digitale.",
     body: "Parlons de votre activité et de vos ambitions. Chaque demande est lue personnellement.",
-    button: "Discuter de votre projet",
+    button: "Discuter de mon projet",
   },
   contact: {
     eyebrow: "Contact",
     headline: "Construisons quelque chose *d'exceptionnel*.",
     subtitle:
-      "Chaque entreprise est différente. Parlez-nous de votre projet et voyons comment créer une expérience digitale à la hauteur de vos ambitions.",
+      "Parlez-nous de votre activité et de ce que vous attendez de votre site. Nous vous répondons personnellement.",
     reviewNote: "Chaque demande est examinée personnellement.",
     emailLabel: "Ou écrivez-nous directement",
     email: CONTACT_EMAIL,
     fields: fields({
-      name: "Nom complet",
+      name: "Nom",
       businessName: "Nom de l'entreprise",
-      email: "Adresse e-mail",
-      phone: "Téléphone",
-      website: "Site web actuel",
-      industry: "Secteur d'activité",
-      projectType: "Quel type de projet envisagez-vous ?",
-      projectOptions: ["Nouveau site web", "Refonte de site", "E-commerce", "Système de réservation", "Autre"],
-      message: "Parlez-nous de votre projet",
-      language: "Langue préférée",
-      optional: "facultatif",
+      contact: "E-mail ou téléphone",
+      contactHint: "vous@entreprise.ch ou 079 123 45 67",
+      message: "Votre message",
     }),
     submit: "Envoyer ma demande",
     sending: "Envoi en cours…",
@@ -245,60 +217,39 @@ const fr: HomeContent = {
     region: "Suisse",
     copyright: "© 2026 Nexova. Tous droits réservés.",
   },
+  demoNotice: {
+    label: "Concept fictif",
+    text: "Démonstration créée par Nexova : l'entreprise, les avis, les coordonnées et les certifications sont des exemples, pas un client réel.",
+    back: "Toutes les réalisations",
+    cta: "Discuter de mon projet",
+  },
 };
 
 const de: HomeContent = {
   seo: {
-    title: "Nexova — Webdesign und Website-Erstellung in der Schweiz",
+    title: "Nexova — Professionelle Websites für Schweizer KMU",
     description:
-      "Schweizer Webstudio: massgeschneiderte, professionelle Websites für KMU und ambitionierte Unternehmen. Webdesign, Relaunch und SEO-Grundlagen in der ganzen Schweiz.",
+      "Nexova erstellt moderne Websites für Schweizer KMU: professionelles Design, lokale Sichtbarkeit und einfachere Kundenanfragen. Visitenkarten-Website ab CHF 750.",
   },
   nav: {
     links: [
-      { label: "Ansatz", href: "#approach" },
       { label: "Leistungen", href: "#services" },
       { label: "Projekte", href: "#work" },
+      { label: "Preise", href: "#pricing" },
       { label: "Ablauf", href: "#process" },
       { label: "Über uns", href: "#about" },
     ],
-    cta: "Projekt besprechen",
+    cta: "Mein Projekt besprechen",
     menuOpen: "Menü öffnen",
     menuClose: "Menü schliessen",
   },
   hero: {
-    eyebrow: "Schweizer Webstudio",
-    headline: "Digitale Exzellenz, *massgeschneidert* für Ihr Unternehmen.",
-    body: "Nexova gestaltet und entwickelt individuelle Websites für ambitionierte Unternehmen: eigenständiges Design, saubere Technik und eine solide SEO-Basis von Anfang an.",
-    ctaPrimary: "Projekt besprechen",
-    ctaSecondary: "Projekte entdecken",
-    keywords: ["Massgeschneidertes Design", "Mobile First", "SEO von Anfang an"],
-  },
-  approach: {
-    eyebrow: "Unser Ansatz",
-    headline: "Keine Vorlage. *Eine Website,* die zu Ihnen passt.",
-    body: "Jedes Unternehmen hat seine eigene Geschichte, seine Kundschaft und seine Ziele. Wir verstehen sie zuerst und gestalten dann eine Website, die dazu passt — nie eine hastig angepasste Schablone.",
-    pillars: [
-      {
-        title: "Persönliche Betreuung",
-        description:
-          "Direkter Austausch vom ersten Gespräch bis zum Livegang. Der Gründer begleitet jedes Projekt persönlich.",
-      },
-      {
-        title: "Individuelles Design",
-        description:
-          "Typografie, Farben, Layout und Bildwelt, entwickelt für Ihre Marke und nicht für einen Katalog.",
-      },
-      {
-        title: "Technische Sorgfalt",
-        description:
-          "Sauberer Code, schnelle Seiten, ein überzeugendes Mobile-Erlebnis und integrierte SEO-Grundlagen.",
-      },
-      {
-        title: "Langfristige Partnerschaft",
-        description:
-          "Auch nach dem Livegang bleiben wir für Sie da, damit Ihre Website mit Ihrem Geschäft wächst.",
-      },
-    ],
+    eyebrow: "Webagentur für Schweizer KMU",
+    headline: "Ihr Unternehmen verdient einen Online-Auftritt, der seinem Können *gerecht wird*.",
+    body: "Nexova erstellt moderne Websites für Schweizer KMU. Professionelles Design, lokale Sichtbarkeit und einfachere Kundenanfragen.",
+    ctaPrimary: "Mein Projekt besprechen",
+    ctaSecondary: "Unsere Projekte ansehen",
+    keywords: ["Massgeschneidertes Design", "Mobile First", "Transparente Preise"],
   },
   services: {
     eyebrow: "Leistungen",
@@ -338,39 +289,64 @@ const de: HomeContent = {
   },
   work: {
     eyebrow: "Projekte",
-    headline: "Konzepte, entwickelt *wie echte Projekte*.",
-    note: "Diese vier Projekte sind konzeptionelle Demonstrationen von Nexova. Es handelt sich nicht um reale Kunden. Die vollständigen Vorschauen sind in Vorbereitung.",
-    status: "Vorschau in Vorbereitung",
-    projects: [
+    headline: "Vier Demonstrationen, *gestaltet wie echte Websites*.",
+    note: "Dies sind fiktive Konzepte, die Nexova erstellt hat, um seine Arbeit zu zeigen. Es sind keine echten Kunden: Unternehmen, Bewertungen, Kontaktdaten und Zertifizierungen sind Beispiele.",
+    badge: "Fiktives Konzept",
+    cta: "Demo ansehen",
+    ctaLabel: "Demo ansehen:",
+  },
+  pricing: {
+    eyebrow: "Preise",
+    headline: "Zwei Pakete, *klare Preise*.",
+    intro: "Wählen Sie den Ausgangspunkt, der zu Ihrem Geschäft passt. Danach stimmen wir alles gemeinsam auf Ihre Bedürfnisse ab.",
+    fromLabel: "ab",
+    featuredLabel: "Am umfassendsten",
+    packages: [
       {
-        id: "valmont",
-        name: "Valmont Automobiles",
-        industry: "Premium-Autowerkstatt",
-        concept:
-          "Ein dunkler, filmischer Auftritt für eine exklusive Werkstatt: Fahrzeuggalerie, Leistungsübersicht und diskrete Kontaktaufnahme.",
+        id: "vitrine",
+        name: "Visitenkarten-Website",
+        price: "CHF 750.–",
+        description: "Um Ihr Unternehmen klar darzustellen und Ihren Kunden die Kontaktaufnahme zu ermöglichen.",
+        includes: [
+          "Individuelles Design in den Farben Ihres Unternehmens",
+          "Saubere Darstellung auf Smartphone, Tablet und Computer",
+          "Vorstellung Ihrer Tätigkeit, Ihrer Leistungen und Ihrer Kontaktdaten",
+          "Kontaktformular",
+          "Grundlagen der lokalen Suchmaschinenoptimierung (SEO)",
+          "Veröffentlichung der Website",
+        ],
+        cta: "Diese Website anfragen",
       },
       {
-        id: "orme",
-        name: "Studio Orme",
-        industry: "Architektur und Bau",
-        concept:
-          "Eine redaktionelle, minimalistische Website, auf der Architekturfotografie jedes Projekt erzählt — vom Plan bis zur Übergabe.",
-      },
-      {
-        id: "aurele",
-        name: "Maison Aurèle",
-        industry: "Beautysalon",
-        concept:
-          "Eine sanfte, elegante Identität mit einfacher Online-Buchung und sorgfältig komponierten Interieur-Bildern.",
-      },
-      {
-        id: "verdane",
-        name: "Verdane Paysages",
-        industry: "Landschaftsbau und Aussengestaltung",
-        concept:
-          "Ein immersives Erlebnis in grossen Formaten und natürlichen Farben, das Gärten und Projekte in Szene setzt.",
+        id: "pro",
+        name: "Professionelle Website",
+        price: "CHF 1'250.–",
+        description: "Für einen umfassenderen Auftritt mit mehr Inhalten und Funktionen.",
+        includes: [
+          "Alles, was in der Visitenkarten-Website enthalten ist",
+          "Umfangreichere Struktur: zusätzliche Leistungs- und Inhaltsseiten",
+          "Funktionen passend zu Ihrem Geschäft, zum Beispiel Terminvergabe oder Reservierung (je nach Projekt)",
+          "SEO-Grundlagen, abgestimmt auf die Struktur der Website",
+        ],
+        cta: "Diese Website anfragen",
       },
     ],
+    maintenance: {
+      title: "Monatliche Wartung",
+      body: "Optional und getrennt vom Preis der Website, damit Ihre Website nach dem Livegang aktuell bleibt. Den Preis nennen wir Ihnen in der Offerte.",
+    },
+    extras: {
+      title: "Zusätzliche Leistungen",
+      body: "Separat und auf Offerte, nur wenn Sie sie brauchen:",
+      items: [
+        "Zusätzliche Seiten",
+        "Buchungs- oder Terminsystem",
+        "Online-Shop",
+        "Relaunch einer bestehenden Website",
+        "Anpassungen nach dem Livegang",
+      ],
+    },
+    note: "Ausgangspreise in Schweizer Franken. Der endgültige Preis hängt von Ihrem Projekt ab und wird Ihnen vor jeder Verpflichtung in einer Offerte bestätigt.",
   },
   process: {
     eyebrow: "Ablauf",
@@ -387,37 +363,36 @@ const de: HomeContent = {
   },
   about: {
     eyebrow: "Über uns",
-    headline: "Ein Schweizer Webstudio, *direkter Kontakt*.",
+    headline: "Eine unabhängige Digitalagentur, *für Schweizer KMU*.",
     body: [
-      "Nexova ist ein modernes Webstudio mit einer einfachen Überzeugung: Ein seriöses Unternehmen verdient eine Website nach seinem Mass — keine Standardvorlage.",
-      "Der Gründer ist persönlich in jedes Projekt und jede Kundenbeziehung eingebunden. Sie wissen immer, mit wem Sie sprechen.",
+      "Nexova ist eine unabhängige Digitalagentur. Wir erstellen Websites für Schweizer KMU, insbesondere in der Westschweiz, mit einer einfachen Überzeugung: Ein seriöses Unternehmen verdient eine Website nach seinem Mass, keine Standardvorlage.",
+      "Der Gründer begleitet jedes Projekt persönlich. Sie wissen immer, mit wem Sie sprechen, ohne Zwischenstellen.",
+    ],
+    pillars: [
+      { title: "Direkte Kommunikation", description: "Ein Ansprechpartner, klare Antworten, vom ersten Gespräch bis zum Livegang." },
+      { title: "Massgeschneiderte Lösungen", description: "Eine Website für Ihr Geschäft und Ihre Kundschaft, keine hastig angepasste Schablone." },
+      { title: "Transparente Preise", description: "Ausgewiesene Preise, eine detaillierte Offerte und keine Überraschungen unterwegs." },
     ],
   },
   cta: {
     headline: "Ihr Unternehmen verdient *einen besseren* digitalen Auftritt.",
     body: "Sprechen wir über Ihr Geschäft und Ihre Ziele. Jede Anfrage wird persönlich gelesen.",
-    button: "Projekt besprechen",
+    button: "Mein Projekt besprechen",
   },
   contact: {
     eyebrow: "Kontakt",
     headline: "Gestalten wir etwas *Aussergewöhnliches*.",
     subtitle:
-      "Jedes Unternehmen ist anders. Erzählen Sie uns von Ihrem Projekt, und wir klären gemeinsam, wie ein digitaler Auftritt entsteht, der Ihren Ansprüchen gerecht wird.",
+      "Erzählen Sie uns von Ihrem Geschäft und davon, was Sie von Ihrer Website erwarten. Wir antworten Ihnen persönlich.",
     reviewNote: "Jede Anfrage wird persönlich geprüft.",
     emailLabel: "Oder schreiben Sie uns direkt",
     email: CONTACT_EMAIL,
     fields: fields({
-      name: "Vollständiger Name",
+      name: "Name",
       businessName: "Unternehmen",
-      email: "E-Mail-Adresse",
-      phone: "Telefon",
-      website: "Aktuelle Website",
-      industry: "Branche",
-      projectType: "Welche Art von Projekt planen Sie?",
-      projectOptions: ["Neue Website", "Website-Relaunch", "E-Commerce", "Buchungssystem", "Anderes"],
-      message: "Erzählen Sie uns von Ihrem Projekt",
-      language: "Bevorzugte Sprache",
-      optional: "optional",
+      contact: "E-Mail oder Telefon",
+      contactHint: "sie@unternehmen.ch oder 079 123 45 67",
+      message: "Ihre Nachricht",
     }),
     submit: "Anfrage senden",
     sending: "Wird gesendet…",
@@ -442,60 +417,39 @@ const de: HomeContent = {
     region: "Schweiz",
     copyright: "© 2026 Nexova. Alle Rechte vorbehalten.",
   },
+  demoNotice: {
+    label: "Fiktives Konzept",
+    text: "Von Nexova erstellte Demonstration: Unternehmen, Bewertungen, Kontaktdaten und Zertifizierungen sind Beispiele, kein echter Kunde.",
+    back: "Alle Projekte",
+    cta: "Mein Projekt besprechen",
+  },
 };
 
 const en: HomeContent = {
   seo: {
-    title: "Nexova — Premium Web Design & Development in Switzerland",
+    title: "Nexova — Professional Websites for Swiss SMEs",
     description:
-      "Swiss web studio creating bespoke, high-performance websites for ambitious businesses. Premium web design, website redesign and SEO foundations in Switzerland.",
+      "Nexova builds modern websites for Swiss SMEs: professional design, local visibility and simpler customer enquiries. Showcase website from CHF 750.",
   },
   nav: {
     links: [
-      { label: "Approach", href: "#approach" },
       { label: "Services", href: "#services" },
       { label: "Work", href: "#work" },
+      { label: "Pricing", href: "#pricing" },
       { label: "Process", href: "#process" },
       { label: "About", href: "#about" },
     ],
-    cta: "Discuss your project",
+    cta: "Discuss my project",
     menuOpen: "Open menu",
     menuClose: "Close menu",
   },
   hero: {
-    eyebrow: "Swiss web studio",
-    headline: "Digital excellence, *built around* your business.",
-    body: "Nexova designs and builds bespoke websites for ambitious businesses: distinctive design, rigorous engineering and SEO foundations in place from day one.",
-    ctaPrimary: "Discuss your project",
-    ctaSecondary: "Explore our work",
-    keywords: ["Bespoke design", "Mobile-first", "SEO built in"],
-  },
-  approach: {
-    eyebrow: "Our approach",
-    headline: "No templates. *A website shaped* around your business.",
-    body: "Every business has its own story, its own clients and its own ambitions. We start by understanding them, then design a website that reflects them — never a template adapted in a hurry.",
-    pillars: [
-      {
-        title: "A personal approach",
-        description:
-          "Direct conversation from the first call to launch. The founder follows every project personally.",
-      },
-      {
-        title: "Bespoke design",
-        description:
-          "Typography, colour, layout and imagery composed for your brand, not for a catalogue.",
-      },
-      {
-        title: "Technical rigour",
-        description:
-          "Clean code, fast pages, a considered mobile experience and SEO foundations built in.",
-      },
-      {
-        title: "A lasting relationship",
-        description:
-          "Once the site is live, we stay available so it can grow with your business.",
-      },
-    ],
+    eyebrow: "Web agency for Swiss SMEs",
+    headline: "Your business deserves an online presence *worthy of* its expertise.",
+    body: "Nexova builds modern websites for Swiss SMEs. Professional design, local visibility and simpler customer enquiries.",
+    ctaPrimary: "Discuss my project",
+    ctaSecondary: "See our work",
+    keywords: ["Bespoke design", "Mobile-first", "Transparent pricing"],
   },
   services: {
     eyebrow: "Services",
@@ -535,39 +489,64 @@ const en: HomeContent = {
   },
   work: {
     eyebrow: "Selected work",
-    headline: "Concepts designed *like real projects*.",
-    note: "These four projects are conceptual demonstrations created by Nexova. They are not real clients. Full previews are in preparation.",
-    status: "Preview in preparation",
-    projects: [
+    headline: "Four demonstrations, *designed like real websites*.",
+    note: "These are fictional concepts created by Nexova to show its work. They are not real clients: the businesses, reviews, contact details and certifications shown are examples.",
+    badge: "Fictional concept",
+    cta: "View the demo",
+    ctaLabel: "View the demo of",
+  },
+  pricing: {
+    eyebrow: "Pricing",
+    headline: "Two packages, *clear prices*.",
+    intro: "Pick the starting point that fits your business. We then refine it together around your needs.",
+    fromLabel: "from",
+    featuredLabel: "Most complete",
+    packages: [
       {
-        id: "valmont",
-        name: "Valmont Automobiles",
-        industry: "Luxury automotive garage",
-        concept:
-          "A dark, cinematic showcase for a high-end workshop: vehicle gallery, service presentation, discreet enquiry.",
+        id: "vitrine",
+        name: "Showcase website",
+        price: "CHF 750.–",
+        description: "To present your business clearly and let your customers get in touch.",
+        includes: [
+          "Bespoke design in your business's colours",
+          "Carefully built for mobile, tablet and desktop",
+          "Presentation of your activity, services and contact details",
+          "Contact form",
+          "Local SEO foundations",
+          "Putting the site online",
+        ],
+        cta: "Request this website",
       },
       {
-        id: "orme",
-        name: "Studio Orme",
-        industry: "Architecture and construction",
-        concept:
-          "An editorial, minimal site where architectural photography tells each project, from plan to handover.",
-      },
-      {
-        id: "aurele",
-        name: "Maison Aurèle",
-        industry: "Beauty salon",
-        concept:
-          "A soft, elegant identity with a simple booking journey and carefully composed interior imagery.",
-      },
-      {
-        id: "verdane",
-        name: "Verdane Paysages",
-        industry: "Landscaping and exterior design",
-        concept:
-          "An immersive, large-format experience in natural tones that presents gardens and completed projects.",
+        id: "pro",
+        name: "Professional website",
+        price: "CHF 1'250.–",
+        description: "For a fuller online presence, with more content and more functionality.",
+        includes: [
+          "Everything included in the showcase website",
+          "A larger structure: additional service and content pages",
+          "Features suited to your business, for example appointment booking or reservations (depending on the project)",
+          "SEO foundations adapted to the site structure",
+        ],
+        cta: "Request this website",
       },
     ],
+    maintenance: {
+      title: "Monthly maintenance",
+      body: "Offered as an option, separate from the website price, to keep your site up to date after launch. The rate is given in your quote.",
+    },
+    extras: {
+      title: "Additional services",
+      body: "Billed separately, by quote, only if you need them:",
+      items: [
+        "Additional pages",
+        "Booking or appointment system",
+        "Online shop",
+        "Redesign of an existing website",
+        "Changes after launch",
+      ],
+    },
+    note: "Starting prices in Swiss francs. The final price depends on your project and is confirmed in a quote before any commitment.",
   },
   process: {
     eyebrow: "Process",
@@ -584,37 +563,36 @@ const en: HomeContent = {
   },
   about: {
     eyebrow: "About",
-    headline: "A Swiss web studio, *a direct relationship*.",
+    headline: "An independent digital agency, *serving Swiss SMEs*.",
     body: [
-      "Nexova is a modern web studio built on a simple conviction: a serious business deserves a website made to its measure, not a generic template.",
-      "The founder is personally involved in every project and every client relationship. You always know who you are talking to.",
+      "Nexova is an independent digital agency. We build websites for Swiss SMEs, particularly in French-speaking Switzerland, with a simple conviction: a serious business deserves a website made to its measure, not a generic template.",
+      "The founder follows every project personally. You always know who you are talking to, with no middlemen.",
+    ],
+    pillars: [
+      { title: "Direct communication", description: "One point of contact and clear answers, from the first conversation to launch." },
+      { title: "Tailored solutions", description: "A website designed for your business and your customers, not a template adapted in a hurry." },
+      { title: "Transparent pricing", description: "Published prices, a detailed quote and no surprises along the way." },
     ],
   },
   cta: {
     headline: "Your business deserves *a better* digital presence.",
     body: "Let's talk about your business and your ambitions. Every enquiry is read personally.",
-    button: "Discuss your project",
+    button: "Discuss my project",
   },
   contact: {
     eyebrow: "Contact",
     headline: "Let's build something *exceptional*.",
     subtitle:
-      "Every business is different. Tell us about your project, and let's explore how we can create a digital experience that reflects your ambitions.",
+      "Tell us about your business and what you expect from your website. We reply personally.",
     reviewNote: "Every enquiry is reviewed personally.",
     emailLabel: "Or write to us directly",
     email: CONTACT_EMAIL,
     fields: fields({
-      name: "Full name",
+      name: "Name",
       businessName: "Business name",
-      email: "Email address",
-      phone: "Phone",
-      website: "Current website",
-      industry: "Business industry",
-      projectType: "What type of project are you considering?",
-      projectOptions: ["New website", "Website redesign", "E-commerce", "Booking system", "Other"],
-      message: "Tell us about your project",
-      language: "Preferred language",
-      optional: "optional",
+      contact: "Email or phone",
+      contactHint: "you@company.ch or 079 123 45 67",
+      message: "Your message",
     }),
     submit: "Send enquiry",
     sending: "Sending…",
@@ -638,6 +616,12 @@ const en: HomeContent = {
     notice: "Legal notice",
     region: "Switzerland",
     copyright: "© 2026 Nexova. All rights reserved.",
+  },
+  demoNotice: {
+    label: "Fictional concept",
+    text: "A demonstration created by Nexova: the business, reviews, contact details and certifications are examples, not a real client.",
+    back: "All work",
+    cta: "Discuss my project",
   },
 };
 

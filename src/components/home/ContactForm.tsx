@@ -11,17 +11,12 @@ import type { Locale } from "@/i18n/routing";
 import type { FormField } from "@/types/home";
 import { cn } from "@/lib/utils";
 
-const FULL_WIDTH = new Set(["projectType", "message"]);
-const LANGUAGE_BY_LOCALE: Record<Locale, string> = {
-  fr: "Français",
-  de: "Deutsch",
-  en: "English",
-};
+const FULL_WIDTH = new Set(["contact", "message"]);
 
 const control =
   "w-full border-0 border-b border-ink/25 bg-transparent px-0 py-3 text-base text-ink placeholder:text-stone/60 transition-colors focus:border-royal focus:outline-none focus-visible:ring-0";
 
-function Field({ field, locale }: { field: FormField; locale: Locale }) {
+function Field({ field }: { field: FormField }) {
   const id = `f-${field.name}`;
   return (
     <div className={cn("flex flex-col", FULL_WIDTH.has(field.name) && "sm:col-span-2")}>
@@ -31,22 +26,7 @@ function Field({ field, locale }: { field: FormField; locale: Locale }) {
       </label>
 
       {field.type === "textarea" ? (
-        <textarea id={id} name={field.name} required={field.required} rows={5} maxLength={4000} className={cn(control, "resize-y")} />
-      ) : field.type === "select" ? (
-        <select
-          id={id}
-          name={field.name}
-          required={field.required}
-          defaultValue={field.name === "preferredLanguage" ? LANGUAGE_BY_LOCALE[locale] : ""}
-          className={cn(control, "cursor-pointer")}
-        >
-          {field.name !== "preferredLanguage" && <option value="" disabled />}
-          {field.options?.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
+        <textarea id={id} name={field.name} required={field.required} rows={5} minLength={10} maxLength={4000} className={cn(control, "resize-y")} />
       ) : (
         <input
           id={id}
@@ -54,6 +34,7 @@ function Field({ field, locale }: { field: FormField; locale: Locale }) {
           type={field.type}
           required={field.required}
           autoComplete={field.autoComplete}
+          inputMode={field.inputMode}
           placeholder={field.placeholder}
           maxLength={200}
           className={control}
@@ -128,7 +109,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
           ) : (
             <form onSubmit={onSubmit} className="grid gap-x-8 gap-y-8 sm:grid-cols-2">
               {contact.fields.map((f) => (
-                <Field key={f.name} field={f} locale={locale} />
+                <Field key={f.name} field={f} />
               ))}
 
               {/* Honeypot: invisible to people, tempting to bots. */}

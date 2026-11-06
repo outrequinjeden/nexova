@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/home/Header";
 import { Hero } from "@/components/home/Hero";
-import { Approach } from "@/components/home/Approach";
 import { Services } from "@/components/home/Services";
 import { Work } from "@/components/home/Work";
+import { Pricing } from "@/components/home/Pricing";
 import { Process } from "@/components/home/Process";
 import { About } from "@/components/home/About";
 import { CtaBand } from "@/components/home/CtaBand";
@@ -43,6 +43,15 @@ export default async function Home({
     areaServed: { "@type": "Country", name: "Switzerland" },
     knowsLanguage: ["fr", "de", "en"],
     serviceType: homeContent[loc].services.items.map((s) => s.title),
+    makesOffer: homeContent[loc].pricing.packages.map((p) => ({
+      "@type": "Offer",
+      name: p.name,
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "CHF",
+        minPrice: p.id === "vitrine" ? 750 : 1250,
+      },
+    })),
   };
 
   return (
@@ -54,9 +63,9 @@ export default async function Home({
       <Header locale={loc} />
       <main className="flex-1">
         <Hero locale={loc} />
-        <Approach locale={loc} />
         <Services locale={loc} />
         <Work locale={loc} />
+        <Pricing locale={loc} />
         <Process locale={loc} />
         <About locale={loc} />
         <CtaBand locale={loc} />

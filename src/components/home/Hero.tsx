@@ -54,7 +54,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <SectionLabel className="nx-rise text-royal-bright">{hero.eyebrow}</SectionLabel>
 
         <h1
-          className="nx-rise mt-8 max-w-[15ch] font-display text-[clamp(3.1rem,9.4vw,9rem)] leading-[0.95] tracking-[-0.02em] text-balance"
+          className="nx-rise mt-8 max-w-[19ch] font-display text-[clamp(2.6rem,6.6vw,6.4rem)] leading-[1] tracking-[-0.02em] text-balance"
           style={{ animationDelay: "0.1s" }}
         >
           <Accent text={hero.headline} />

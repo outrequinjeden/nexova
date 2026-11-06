@@ -1,23 +1,12 @@
-export const PROJECT_TYPES = [
-  "New website",
-  "Website redesign",
-  "E-commerce",
-  "Booking system",
-  "Other",
-] as const;
-export const LANGUAGES = ["Français", "Deutsch", "English"] as const;
 export const LOCALES = ["fr", "de", "en"] as const;
 
 export interface ContactInput {
   name: string;
   businessName: string;
-  email: string;
+  /** At least one of email / phone is always present. */
+  email?: string;
   phone?: string;
-  website?: string;
-  industry: string;
-  projectType: (typeof PROJECT_TYPES)[number];
   message: string;
-  preferredLanguage: (typeof LANGUAGES)[number];
   locale: (typeof LOCALES)[number];
 }
 
@@ -38,68 +27,40 @@ function line(v: unknown): string | null {
   return /[\r\n]/.test(s) ? null : s;
 }
 
-function normaliseUrl(raw: string): string | null {
-  const candidate = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
-  try {
-    const u = new URL(candidate);
-    if (!/^https?:$/.test(u.protocol) || !u.hostname.includes(".")) return null;
-    return u.toString().slice(0, 200);
-  } catch {
-    return null;
-  }
-}
-
 export function validateContact(body: Record<string, unknown>): ValidationResult {
   const bad: string[] = [];
   const check = (field: string, ok: boolean) => ok || bad.push(field);
 
   const name = line(body.name);
   const businessName = line(body.businessName);
-  const email = line(body.email)?.toLowerCase() ?? null;
-  const industry = line(body.industry);
-  const phoneRaw = line(body.phone);
-  const websiteRaw = line(body.website);
   const message = str(body.message).replace(/\r\n/g, "\n");
 
   check("name", !!name && name.length >= 2 && name.length <= 120);
   check("businessName", !!businessName && businessName.length >= 2 && businessName.length <= 160);
-  check("email", !!email && email.length <= 254 && EMAIL.test(email));
-  check("industry", !!industry && industry.length >= 2 && industry.length <= 120);
   check("message", message.length >= 10 && message.length <= 4000);
 
-  const projectType = PROJECT_TYPES.find((p) => p === body.projectType);
-  check("projectType", !!projectType);
+  // One field: "email or phone". Legacy separate `email` / `phone` keys still work.
+  const contactRaw = line(body.contact) ?? "";
+  let email: string | undefined;
+  let phone: string | undefined;
+  const legacyEmail = line(body.email);
+  const legacyPhone = line(body.phone);
+  if (contactRaw) {
+    if (contactRaw.includes("@")) email = contactRaw.toLowerCase();
+    else phone = contactRaw;
+  }
+  if (!email && legacyEmail) email = legacyEmail.toLowerCase();
+  if (!phone && legacyPhone) phone = legacyPhone;
 
-  const preferredLanguage =
-    LANGUAGES.find((l) => l === body.preferredLanguage) ?? LANGUAGES[0];
+  check("contact", !!email || !!phone);
+  if (email) check("contact", email.length <= 254 && EMAIL.test(email));
+  if (phone) check("contact", PHONE.test(phone));
+
   const locale = LOCALES.find((l) => l === body.locale) ?? LOCALES[0];
 
-  let phone: string | undefined;
-  if (phoneRaw) {
-    check("phone", PHONE.test(phoneRaw));
-    phone = phoneRaw;
-  }
-  let website: string | undefined;
-  if (websiteRaw) {
-    const url = normaliseUrl(websiteRaw);
-    check("website", !!url);
-    website = url ?? undefined;
-  }
-
-  if (bad.length) return { ok: false, fields: bad };
+  if (bad.length) return { ok: false, fields: [...new Set(bad)] };
   return {
     ok: true,
-    data: {
-      name: name!,
-      businessName: businessName!,
-      email: email!,
-      phone,
-      website,
-      industry: industry!,
-      projectType: projectType!,
-      message,
-      preferredLanguage,
-      locale,
-    },
+    data: { name: name!, businessName: businessName!, email, phone, message, locale },
   };
 }
